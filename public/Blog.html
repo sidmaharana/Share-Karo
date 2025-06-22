@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engineering Blog | SeamlessShare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: #121212;
+        color: #e0e0e0;
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      }
+      
+      .panel {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      
+      .header-accent {
+        border-bottom: 2px solid #3a7bd5;
+      }
+      
+      .status-indicator {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 6px;
+      }
+      
+      .status-active {
+        background: #48bb78;
+        box-shadow: 0 0 8px #48bb78;
+      }
+      
+      .blog-card {
+        background: #2d3748;
+        border-left: 3px solid #3a7bd5;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: all 0.2s;
+      }
+      
+      .blog-card:hover {
+        background: #4a5568;
+        transform: translateY(-2px);
+      }
+      
+      .blog-title {
+        color: #3a7bd5;
+        font-weight: 500;
+        margin-bottom: 12px;
+        font-size: 18px;
+      }
+      
+      .blog-date {
+        color: #718096;
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+      
+      .blog-excerpt {
+        color: #a0aec0;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      
+      .btn-primary {
+        background: #3a7bd5;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+      
+      .btn-primary:hover {
+        background: #2c5fb3;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+      <!-- Header -->
+      <header class="mb-8 panel p-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="status-indicator status-active"></div>
+            <h1 class="text-2xl font-mono font-medium">SeamlessShare</h1>
+            <span class="ml-2 text-sm text-gray-400">v2.4.1</span>
+          </div>
+          <nav>
+            <ul class="flex space-x-6 text-sm">
+              <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+              <li class="relative group">
+                <a href="#" class="hover:text-blue-400">Resources</a>
+                <div class="absolute hidden group-hover:block bg-gray-800 p-2 rounded shadow-lg mt-1 w-40">
+                  <a href="Blog.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">Blog</a>
+                  <a href="About_us.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">About</a>
+                </div>
+              </li>
+              <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main>
+        <section class="panel p-6 mb-6">
+          <div class="header-accent pb-2 mb-4">
+            <h2 class="text-lg font-mono font-medium">Engineering Blog</h2>
+          </div>
+          
+          <div class="blog-card">
+            <div class="blog-date">2025-03-15 | SYSTEM ARCHITECTURE</div>
+            <h3 class="blog-title">Building a Zero-Knowledge File Transfer Protocol</h3>
+            <p class="blog-excerpt">
+              We implemented end-to-end encryption without server-side decryption capability. 
+              This technical deep dive explains our AES-256 implementation and key exchange protocol.
+            </p>
+            <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
+          </div>
+          
+          <div class="blog-card">
+            <div class="blog-date">2025-02-28 | PERFORMANCE</div>
+            <h3 class="blog-title">Optimizing Global File Transfer Latency</h3>
+            <p class="blog-excerpt">
+              How we reduced median transfer times by 62% through edge caching and TCP optimization. 
+              Includes benchmarks across different regions and file sizes.
+            </p>
+            <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
+          </div>
+          
+          <div class="blog-card">
+            <div class="blog-date">2025-01-10 | SECURITY</div>
+            <h3 class="blog-title">Implementing Auto-Purge for Temporary Storage</h3>
+            <p class="blog-excerpt">
+              Our cryptographic proof-of-deletion system ensures files are completely removed from 
+              storage nodes after 24 hours. Technical details on our secure erase implementation.
+            </p>
+            <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
+          </div>
+          
+          <div class="blog-card">
+            <div class="blog-date">2024-12-05 | FRONTEND</div>
+            <h3 class="blog-title">Minimalist UI for Maximum Security</h3>
+            <p class="blog-excerpt">
+              Why we chose a terminal-inspired interface design that reduces attack surface while 
+              maintaining usability. Analysis of user behavior patterns.
+            </p>
+            <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
+        <p>SeamlessShare Engine v2.4.1 | Secure File Transfer Protocol</p>
+        <p class="mt-1">© 2025 Network Operations</p>
+      </footer>
+    </div>
+  </body>
+</html>

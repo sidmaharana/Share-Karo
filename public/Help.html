@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Help | SeamlessShare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: #121212;
+        color: #e0e0e0;
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      }
+      
+      .panel {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      
+      .header-accent {
+        border-bottom: 2px solid #3a7bd5;
+      }
+      
+      .status-indicator {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 6px;
+      }
+      
+      .status-active {
+        background: #48bb78;
+        box-shadow: 0 0 8px #48bb78;
+      }
+      
+      .help-card {
+        background: #2d3748;
+        border-left: 3px solid #3a7bd5;
+        padding: 20px;
+        margin-bottom: 16px;
+        transition: all 0.2s;
+      }
+      
+      .help-card:hover {
+        background: #4a5568;
+      }
+      
+      .help-title {
+        color: #3a7bd5;
+        font-weight: 500;
+        margin-bottom: 12px;
+        font-size: 18px;
+      }
+      
+      .help-content {
+        color: #a0aec0;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      
+      .warning-text {
+        color: #f68787;
+        font-weight: 500;
+      }
+      
+      .contact-link {
+        color: #3a7bd5;
+        text-decoration: none;
+      }
+      
+      .contact-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+      <!-- Header -->
+      <header class="mb-8 panel p-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="status-indicator status-active"></div>
+            <h1 class="text-2xl font-mono font-medium">SeamlessShare</h1>
+            <span class="ml-2 text-sm text-gray-400">v2.4.1</span>
+          </div>
+          <nav>
+            <ul class="flex space-x-6 text-sm">
+              <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+              <li class="relative group">
+                <a href="#" class="hover:text-blue-400">Resources</a>
+                <div class="absolute hidden group-hover:block bg-gray-800 p-2 rounded shadow-lg mt-1 w-40">
+                  <a href="Blog.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">Blog</a>
+                  <a href="About_us.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">About</a>
+                </div>
+              </li>
+              <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main>
+        <section class="panel p-6 mb-6">
+          <div class="header-accent pb-2 mb-4">
+            <h2 class="text-lg font-mono font-medium">System Documentation</h2>
+          </div>
+          
+          <div class="help-card">
+            <h3 class="help-title">File Transmission Protocol</h3>
+            <div class="help-content">
+              <p>1. Initiate upload sequence via the file selector interface</p>
+              <p>2. System will generate a 6-digit access code upon successful transmission</p>
+              <p>3. Provide this code to the recipient for secure retrieval</p>
+            </div>
+          </div>
+          
+          <div class="help-card">
+            <h3 class="help-title">Data Retrieval Process</h3>
+            <div class="help-content">
+              <p>1. Input the 6-digit access code in the download module</p>
+              <p>2. Execute the retrieval command</p>
+              <p>3. File will decrypt and download to local storage</p>
+            </div>
+          </div>
+          
+          <div class="help-card">
+            <h3 class="help-title">System Specifications</h3>
+            <div class="help-content">
+              <p>• Supports all standard file formats (MIME types)</p>
+              <p>• Maximum payload size: 500MB per transmission</p>
+              <p>• AES-256 encryption during transit and storage</p>
+            </div>
+          </div>
+          
+          <div class="help-card">
+            <h3 class="help-title">Security Protocols</h3>
+            <div class="help-content">
+              <p>• Temporary storage with auto-purge after 24 hours</p>
+              <p>• Zero-knowledge architecture - no file inspection</p>
+              <p>• End-to-end encrypted transfer channels</p>
+            </div>
+          </div>
+          
+          <div class="help-card">
+            <h3 class="help-title">Troubleshooting Guide</h3>
+            <div class="help-content">
+              <p class="warning-text">ERROR: Invalid access code</p>
+              <p>• Verify code with sender</p>
+              <p>• Check transmission expiration status</p>
+              
+              <p class="warning-text mt-3">ERROR: Upload failure</p>
+              <p>• Confirm network connectivity</p>
+              <p>• Validate file size compliance</p>
+            </div>
+          </div>
+          
+          <div class="help-card">
+            <h3 class="help-title">Technical Support</h3>
+            <div class="help-content">
+              <p>For system issues, contact our engineering team:</p>
+              <p>📧 <a href="mailto:uplords@filetransfer.com" class="contact-link">uplords@filetransfer.com</a></p>
+              <p class="text-xs mt-2">Response time: 24-48 hours</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
+        <p>SeamlessShare Engine v2.4.1 | Secure File Transfer Protocol</p>
+        <p class="mt-1">© 2025 Network Operations</p>
+      </footer>
+    </div>
+  </body>
+</html>
