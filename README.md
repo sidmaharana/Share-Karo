@@ -1,5 +1,5 @@
 # Seamless Share - Temporary File Transfer Service
-https://seamless-share.koyeb.app
+https://seamless-share.onrender.com/
 
 A lightweight file sharing application that allows users to upload files and share them via a 6-digit code. Files are automatically deleted after 3 minutes for security and storage optimization.
 
