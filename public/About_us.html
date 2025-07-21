@@ -1,176 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us | Share Karo</title>
-    <link rel="icon" type="image/png" href="https://i.ibb.co/HLrv53Tf/Seamless-Share-Logo-Design.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <style>
-      body {
-        background: #121212;
-        color: #e0e0e0;
-        font-family: 'IBM Plex Mono', 'Courier New', monospace;
-        overflow-x: hidden;
-      }
-      canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 0;
-        pointer-events: none;
-      }
-      .panel {
-        background: #1e1e1e;
-        border: 1px solid #333;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        z-index: 10;
-        position: relative;
-      }
-      .header-accent {
-        border-bottom: 2px solid #3a7bd5;
-      }
-      .team-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-      }
-      .team-card {
-        background: #2d3748;
-        border-left: 3px solid #3a7bd5;
-        padding: 20px;
-        transition: all 0.2s;
-        border-radius: 4px;
-      }
-      .team-card:hover {
-        background: #4a5568;
-        transform: translateY(-2px);
-      }
-      .team-title {
-        color: #3a7bd5;
-        font-weight: 500;
-        margin-bottom: 8px;
-      }
-      .team-desc {
-        color: #a0aec0;
-        font-size: 14px;
-        line-height: 1.5;
-      }
-    </style>
-  </head>
-  <body class="min-h-screen">
-    <canvas id="matrixCanvas" class="w-full h-full"></canvas>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Share Karo</title>
+  <link rel="icon" type="image/png" href="https://i.ibb.co/HLrv53Tf/Seamless-Share-Logo-Design.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #121212;
+      color: #e0e0e0;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      overflow-x: hidden;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .panel {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      z-index: 10;
+      position: relative;
+    }
+    .header-accent {
+      border-bottom: 2px solid #3a7bd5;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .team-card {
+      background: #2d3748;
+      border-left: 3px solid #3a7bd5;
+      padding: 20px;
+      transition: all 0.2s;
+      border-radius: 4px;
+    }
+    .team-card:hover {
+      background: #4a5568;
+      transform: translateY(-2px);
+    }
+    .team-title {
+      color: #3a7bd5;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .team-desc {
+      color: #a0aec0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .status-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      background-color: #10b981;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <canvas id="matrixCanvas" class="w-full h-full"></canvas>
 
-    <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
-
-      <!-- Header -->
-      <header class="mb-8 panel p-4">
-        <div class="flex justify-between items-center">
+  <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+    <!-- Header -->
+    <header class="mb-8 panel p-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <div class="status-indicator"></div>
           <h1 class="text-2xl font-mono font-medium">Share Karo</h1>
-          <nav>
-            <ul class="flex space-x-6 text-sm">
-              <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
-              <li class="relative group">
-                <a href="#" class="hover:text-blue-400">Resources</a>
-                <div class="absolute hidden group-hover:block bg-gray-800 p-2 rounded shadow-lg mt-1 w-40">
-                  <a href="Blog.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">Blog</a>
-                  <a href="About_us.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">About</a>
-                </div>
-              </li>
-              <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
-            </ul>
-          </nav>
         </div>
-      </header>
+        <nav>
+          <ul class="flex space-x-6 text-sm">
+            <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+            <li class="relative group">
+              <a href="#" class="hover:text-blue-400">Resources</a>
+              <div class="absolute hidden group-hover:block bg-gray-800 p-2 rounded shadow-lg mt-1 w-40">
+                <a href="Blog.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">Blog</a>
+                <a href="About_us.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">About</a>
+              </div>
+            </li>
+            <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-      <!-- About Section -->
-      <main>
-        <section class="panel p-6 mb-6">
-          <div class="header-accent pb-2 mb-4">
-            <h2 class="text-lg font-mono font-medium">About Share Karo</h2>
-          </div>
-          <div class="text-sm leading-relaxed space-y-4">
-            <p>
-              Share Karo is a secure, intuitive, and privacy-first file sharing platform built by passionate students of Electronics and Computer Engineering at PICT, Pune.
-            </p>
-            <p>
-              Our mission is to provide lightning-fast file transfer without compromising security. We leverage <strong>end-to-end encryption</strong> and a <strong>zero-knowledge architecture</strong> to make sure your data remains private and in your control.
-            </p>
-            <p>
-              With our innovative matrix-themed UI, minimalistic approach, and robust backend architecture, Share Karo offers a unique experience for students, developers, and professionals alike.
-            </p>
-            <p>
-              Version 2.4.1 brings text sharing, upgraded UI, and significant performance improvements to support distributed, ephemeral file storage.
-            </p>
-          </div>
-        </section>
+    <!-- About Section -->
+    <main>
+      <section class="panel p-6 mb-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">About Share Karo</h2>
+        </div>
+        <div class="text-sm leading-relaxed space-y-4">
+          <p>
+            Share Karo is a secure, intuitive, and privacy-first file sharing platform built by passionate developers who believe in simple, secure file transfers.
+          </p>
+          <p>
+            Our mission is to provide lightning-fast file transfer without compromising security. We leverage <strong>end-to-end encryption</strong> and a <strong>zero-knowledge architecture</strong> to make sure your data remains private and in your control.
+          </p>
+          <p>
+            With our innovative matrix-themed UI, minimalistic approach, and robust backend architecture, Share Karo offers a unique experience for students, developers, and professionals alike.
+          </p>
+          <p>
+            The platform supports both file and text sharing with automatic expiration after 24 hours, ensuring your data doesn't linger unnecessarily on our servers.
+          </p>
+        </div>
+      </section>
 
-        <!-- Team Section -->
-        <section class="panel p-6">
-          <div class="header-accent pb-2 mb-4">
-            <h2 class="text-lg font-mono font-medium">Meet the Team</h2>
+      <!-- Team Section -->
+      <section class="panel p-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Meet the Team</h2>
+        </div>
+        <div class="team-grid">
+          <div class="team-card">
+            <h3 class="team-title">🚀 Backend Team</h3>
+            <p class="team-desc">
+              Our backend engineers built the secure file transfer protocol, encryption systems, and scalable infrastructure that powers Share Karo's core functionality.
+            </p>
           </div>
-          <div class="team-grid">
-            <div class="team-card">
-              <h3 class="team-title">🚀 Parv Seth</h3>
-              <p class="team-desc">
-                Systems Architect – Designed deployment infrastructure, scalable file routing, and CDN-based optimization to minimize latency across networks.
-              </p>
-            </div>
-            <div class="team-card">
-              <h3 class="team-title">👨‍💻 Sidharth Maharana</h3>
-              <p class="team-desc">
-                Backend Engineer – Developed encryption systems, access code protocols, and implemented secure GridFS-based storage with file lifecycle handling.
-              </p>
-            </div>
-            <div class="team-card">
-              <h3 class="team-title">👩‍💻 Saee Tarde</h3>
-              <p class="team-desc">
-                Frontend Engineer – Crafted the intuitive user interface with real-time feedback, adaptive theming, and consistent UX for both file and text sharing.
-              </p>
-            </div>
+          <div class="team-card">
+            <h3 class="team-title">👨‍💻 Frontend Team</h3>
+            <p class="team-desc">
+              The frontend team crafted the intuitive user interface with real-time feedback, adaptive theming, and consistent UX for both file and text sharing.
+            </p>
           </div>
-        </section>
-      </main>
+          <div class="team-card">
+            <h3 class="team-title">👩‍💻 Security Team</h3>
+            <p class="team-desc">
+              Our security experts implemented end-to-end encryption, secure key exchange, and rigorous penetration testing to ensure your data stays protected.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
 
-      <!-- Footer -->
-      <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
-        <p>Share Karo | Secure File Transfer Protocol</p>
-        <p class="mt-1">© 2025 Network Operations</p>
-      </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
+      <p>Share Karo | Secure File Transfer Protocol</p>
+      <p class="mt-1">© 2025 Network Operations</p>
+    </footer>
+  </div>
 
-    <!-- Matrix Animation Background -->
-    <script>
-      const canvas = document.getElementById('matrixCanvas');
-      const ctx = canvas.getContext('2d');
+  <!-- Matrix Animation Background -->
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#3a7bd5';
+      ctx.font = fontSize + 'px IBM Plex Mono';
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 35);
+    window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
-      const letters = '01';
-      const fontSize = 14;
-      const columns = canvas.width / fontSize;
-      const drops = Array.from({ length: columns }).fill(1);
-
-      function draw() {
-        ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#3a7bd5';
-        ctx.font = fontSize + 'px IBM Plex Mono';
-        for (let i = 0; i < drops.length; i++) {
-          const text = letters[Math.floor(Math.random() * letters.length)];
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-          drops[i]++;
-        }
-      }
-      setInterval(draw, 35);
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
