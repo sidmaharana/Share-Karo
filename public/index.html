@@ -159,6 +159,91 @@
           <p id="uploadStatus" class="text-xs text-gray-400 font-mono mb-4">Status: Ready</p>
         </section>
 
+        <!-- Inside the <main class="grid md:grid-cols-2 gap-6"> block, after File Upload Panel -->
+
+<!-- TEXT SHARE ADDED -->
+<section class="panel p-6 mt-6">
+  <div class="header-accent pb-2 mb-4">
+    <h2 class="text-lg font-mono font-medium">Share a Message</h2>
+  </div>
+  <form id="textForm" class="space-y-4">
+    <textarea id="textMessage" placeholder="Enter your message here..." rows="4"
+              class="w-full p-2 rounded text-sm font-mono bg-gray-800 border border-gray-600 text-white" required></textarea>
+    <button type="submit" class="btn-primary font-mono py-2 px-6 rounded text-sm w-full">
+      GENERATE CODE
+    </button>
+  </form>
+  <div id="textShareCode" class="mt-4 hidden">
+    <p class="text-sm font-mono">Share this code:</p>
+    <div id="generatedCodeText" class="code-display mt-1"></div>
+  </div>
+</section>
+
+<section class="panel p-6 mt-6">
+  <div class="header-accent pb-2 mb-4">
+    <h2 class="text-lg font-mono font-medium">Read Shared Message</h2>
+  </div>
+  <div class="mb-4">
+    <input type="text" id="readMessageCode" placeholder="Enter code to view message"
+           class="w-full p-2 rounded text-sm font-mono" />
+  </div>
+  <button id="readMessageBtn" class="btn-secondary w-full font-mono py-2 rounded text-sm">
+    VIEW MESSAGE
+  </button>
+  <div id="receivedMessageBox" class="mt-4 hidden">
+    <h3 class="text-sm font-mono mb-1">Received Message:</h3>
+    <p id="receivedMessage" class="text-sm font-mono bg-gray-800 p-3 rounded"></p>
+  </div>
+</section>
+<!-- TEXT SHARE ADDED END -->
+
+<!-- Add inside <script> block at bottom of page -->
+<script>
+  document.getElementById("textForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const message = document.getElementById("textMessage").value.trim();
+    if (!message) return;
+
+    const res = await fetch("/text", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message }),
+    });
+
+    const result = await res.json();
+    if (res.ok) {
+      const codeBox = document.getElementById("textShareCode");
+      const codeDisplay = document.getElementById("generatedCodeText");
+      codeDisplay.textContent = result.code;
+      codeDisplay.onclick = () => copyToClipboard(result.code);
+      codeBox.classList.remove("hidden");
+      document.getElementById("textMessage").value = "";
+    } else {
+      alert(result.error || "Something went wrong.");
+    }
+  });
+
+  document.getElementById("readMessageBtn").addEventListener("click", async function () {
+    const code = document.getElementById("readMessageCode").value.trim();
+    if (!code) return alert("Enter a code");
+
+    const res = await fetch(`/text/${code}`);
+    const result = await res.json();
+
+    const box = document.getElementById("receivedMessageBox");
+    const msg = document.getElementById("receivedMessage");
+
+    if (res.ok) {
+      msg.textContent = result.message;
+      box.classList.remove("hidden");
+    } else {
+      msg.textContent = result.error || "Invalid or expired code.";
+      box.classList.remove("hidden");
+    }
+  });
+</script>
+
+
         <!-- Download Panel -->
         <section class="panel p-6">
           <div class="header-accent pb-2 mb-4">
