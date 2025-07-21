@@ -1,5 +1,5 @@
 {
-  "name": "SeamlessShare",
+  "name": "Share Karo",
   "version": "1.0.0",
   "description": "Temporary file transfer service with automatic deletion",
   "main": "server.js",
