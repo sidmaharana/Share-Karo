@@ -10,64 +10,73 @@
         background: #121212;
         color: #e0e0e0;
         font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        overflow-x: hidden;
       }
-      
+
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
       .panel {
         background: #1e1e1e;
         border: 1px solid #333;
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+        position: relative;
       }
-      
+
       .header-accent {
         border-bottom: 2px solid #3a7bd5;
       }
-      
+
       .status-indicator {
         height: 10px;
         width: 10px;
         border-radius: 50%;
         display: inline-block;
         margin-right: 6px;
-      }
-      
-      .status-active {
         background: #48bb78;
         box-shadow: 0 0 8px #48bb78;
       }
-      
+
       .blog-card {
         background: #2d3748;
         border-left: 3px solid #3a7bd5;
         padding: 20px;
         margin-bottom: 20px;
         transition: all 0.2s;
+        border-radius: 4px;
       }
-      
+
       .blog-card:hover {
         background: #4a5568;
         transform: translateY(-2px);
       }
-      
+
       .blog-title {
         color: #3a7bd5;
         font-weight: 500;
         margin-bottom: 12px;
         font-size: 18px;
       }
-      
+
       .blog-date {
         color: #718096;
         font-size: 12px;
         margin-bottom: 8px;
       }
-      
+
       .blog-excerpt {
         color: #a0aec0;
         font-size: 14px;
         line-height: 1.6;
       }
-      
+
       .btn-primary {
         background: #3a7bd5;
         color: white;
@@ -76,7 +85,7 @@
         font-size: 14px;
         transition: all 0.2s;
       }
-      
+
       .btn-primary:hover {
         background: #2c5fb3;
       }
@@ -84,14 +93,15 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <canvas id="matrixCanvas" class="w-full h-full"></canvas>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl relative z-10">
       <!-- Header -->
       <header class="mb-8 panel p-4">
         <div class="flex justify-between items-center">
           <div class="flex items-center">
-            <div class="status-indicator status-active"></div>
+            <div class="status-indicator"></div>
             <h1 class="text-2xl font-mono font-medium">SeamlessShare</h1>
-            <span class="ml-2 text-sm text-gray-400">v2.4.1</span>
           </div>
           <nav>
             <ul class="flex space-x-6 text-sm">
@@ -115,7 +125,7 @@
           <div class="header-accent pb-2 mb-4">
             <h2 class="text-lg font-mono font-medium">Engineering Blog</h2>
           </div>
-          
+
           <div class="blog-card">
             <div class="blog-date">2025-03-15 | SYSTEM ARCHITECTURE</div>
             <h3 class="blog-title">Building a Zero-Knowledge File Transfer Protocol</h3>
@@ -125,7 +135,7 @@
             </p>
             <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
           </div>
-          
+
           <div class="blog-card">
             <div class="blog-date">2025-02-28 | PERFORMANCE</div>
             <h3 class="blog-title">Optimizing Global File Transfer Latency</h3>
@@ -135,7 +145,7 @@
             </p>
             <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
           </div>
-          
+
           <div class="blog-card">
             <div class="blog-date">2025-01-10 | SECURITY</div>
             <h3 class="blog-title">Implementing Auto-Purge for Temporary Storage</h3>
@@ -145,7 +155,7 @@
             </p>
             <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
           </div>
-          
+
           <div class="blog-card">
             <div class="blog-date">2024-12-05 | FRONTEND</div>
             <h3 class="blog-title">Minimalist UI for Maximum Security</h3>
@@ -160,9 +170,41 @@
 
       <!-- Footer -->
       <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
-        <p>SeamlessShare Engine v2.4.1 | Secure File Transfer Protocol</p>
+        <p>SeamlessShare | Secure File Transfer Protocol</p>
         <p class="mt-1">© 2025 Network Operations</p>
       </footer>
     </div>
+
+    <!-- Matrix Animation Script -->
+    <script>
+      const canvas = document.getElementById('matrixCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const letters = '01';
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      const drops = Array.from({ length: columns }).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#3a7bd5';
+        ctx.font = fontSize + 'px IBM Plex Mono';
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters[Math.floor(Math.random() * letters.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
+        }
+      }
+      setInterval(draw, 35);
+
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
   </body>
 </html>
