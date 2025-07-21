@@ -3,81 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us | SeamlessShare</title>
+    <title>About Us | Share Karo</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/HLrv53Tf/Seamless-Share-Logo-Design.png" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <style>
       body {
         background: #121212;
         color: #e0e0e0;
         font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        overflow-x: hidden;
       }
-      
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
       .panel {
         background: #1e1e1e;
         border: 1px solid #333;
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        z-index: 10;
+        position: relative;
       }
-      
       .header-accent {
         border-bottom: 2px solid #3a7bd5;
       }
-      
-      .status-indicator {
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 6px;
-      }
-      
-      .status-active {
-        background: #48bb78;
-        box-shadow: 0 0 8px #48bb78;
-      }
-      
       .team-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 20px;
       }
-      
       .team-card {
         background: #2d3748;
         border-left: 3px solid #3a7bd5;
         padding: 20px;
         transition: all 0.2s;
+        border-radius: 4px;
       }
-      
       .team-card:hover {
         background: #4a5568;
         transform: translateY(-2px);
       }
-      
       .team-title {
         color: #3a7bd5;
         font-weight: 500;
         margin-bottom: 8px;
       }
-      
       .team-desc {
         color: #a0aec0;
         font-size: 14px;
         line-height: 1.5;
       }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
+    <canvas id="matrixCanvas" class="w-full h-full"></canvas>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+
       <!-- Header -->
       <header class="mb-8 panel p-4">
         <div class="flex justify-between items-center">
-          <div class="flex items-center">
-            <div class="status-indicator status-active"></div>
-            <h1 class="text-2xl font-mono font-medium">SeamlessShare</h1>
-            <span class="ml-2 text-sm text-gray-400">v2.4.1</span>
-          </div>
+          <h1 class="text-2xl font-mono font-medium">Share Karo</h1>
           <nav>
             <ul class="flex space-x-6 text-sm">
               <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
@@ -94,50 +85,50 @@
         </div>
       </header>
 
-      <!-- Main Content -->
+      <!-- About Section -->
       <main>
         <section class="panel p-6 mb-6">
           <div class="header-accent pb-2 mb-4">
-            <h2 class="text-lg font-mono font-medium">About Our Project</h2>
+            <h2 class="text-lg font-mono font-medium">About Share Karo</h2>
           </div>
-          
-          <div class="text-sm leading-relaxed">
-            <p class="mb-4">
-              We are a team of Electronics and Computer Engineering students from PICT College, 
-              building secure file transfer solutions with military-grade encryption and 
-              minimal latency architecture.
+          <div class="text-sm leading-relaxed space-y-4">
+            <p>
+              Share Karo is a secure, intuitive, and privacy-first file sharing platform built by passionate students of Electronics and Computer Engineering at PICT, Pune.
             </p>
             <p>
-              Our platform combines end-to-end encryption with a distributed network 
-              architecture to ensure your files are protected both in transit and at rest.
+              Our mission is to provide lightning-fast file transfer without compromising security. We leverage <strong>end-to-end encryption</strong> and a <strong>zero-knowledge architecture</strong> to make sure your data remains private and in your control.
+            </p>
+            <p>
+              With our innovative matrix-themed UI, minimalistic approach, and robust backend architecture, Share Karo offers a unique experience for students, developers, and professionals alike.
+            </p>
+            <p>
+              Version 2.4.1 brings text sharing, upgraded UI, and significant performance improvements to support distributed, ephemeral file storage.
             </p>
           </div>
         </section>
 
+        <!-- Team Section -->
         <section class="panel p-6">
           <div class="header-accent pb-2 mb-4">
-            <h2 class="text-lg font-mono font-medium">Development Team</h2>
+            <h2 class="text-lg font-mono font-medium">Meet the Team</h2>
           </div>
-          
           <div class="team-grid">
             <div class="team-card">
               <h3 class="team-title">🚀 Parv Seth</h3>
               <p class="team-desc">
-                Systems Architect - Designed the deployment infrastructure and global CDN routing for optimal file transfer speeds.
+                Systems Architect – Designed deployment infrastructure, scalable file routing, and CDN-based optimization to minimize latency across networks.
               </p>
             </div>
-            
             <div class="team-card">
               <h3 class="team-title">👨‍💻 Sidharth Maharana</h3>
               <p class="team-desc">
-                Backend Engineer - Implemented the encryption protocols and storage layer with zero-knowledge architecture.
+                Backend Engineer – Developed encryption systems, access code protocols, and implemented secure GridFS-based storage with file lifecycle handling.
               </p>
             </div>
-            
             <div class="team-card">
               <h3 class="team-title">👩‍💻 Saee Tarde</h3>
               <p class="team-desc">
-                Frontend Engineer - Developed the minimal interface with focus on usability and security transparency.
+                Frontend Engineer – Crafted the intuitive user interface with real-time feedback, adaptive theming, and consistent UX for both file and text sharing.
               </p>
             </div>
           </div>
@@ -146,9 +137,40 @@
 
       <!-- Footer -->
       <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
-        <p>SeamlessShare Engine v2.4.1 | Secure File Transfer Protocol</p>
+        <p>Share Karo | Secure File Transfer Protocol</p>
         <p class="mt-1">© 2025 Network Operations</p>
       </footer>
     </div>
+
+    <!-- Matrix Animation Background -->
+    <script>
+      const canvas = document.getElementById('matrixCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const letters = '01';
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      const drops = Array.from({ length: columns }).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#3a7bd5';
+        ctx.font = fontSize + 'px IBM Plex Mono';
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters[Math.floor(Math.random() * letters.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
+        }
+      }
+      setInterval(draw, 35);
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
   </body>
 </html>
