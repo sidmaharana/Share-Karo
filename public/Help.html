@@ -3,15 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Help | Share Karo</title>
+  <title>Help | ShareKaro</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #0f172a;
-      color: #e2e8f0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      overflow-x: hidden;
     }
-
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .panel {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      z-index: 10;
+      position: relative;
+    }
+    .header-accent { border-bottom: 2px solid #3a7bd5; }
     .status-indicator {
       width: 10px;
       height: 10px;
@@ -19,54 +36,104 @@
       background-color: #10b981;
       animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.5;
-        transform: scale(1.5);
-      }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
     }
+    .btn-primary {
+      background: #3a7bd5; color: white; transition: all 0.2s;
+    }
+    .btn-primary:hover { background: #2c5fb3; }
   </style>
 </head>
-<body class="min-h-screen px-6 py-8">
-  <!-- Header -->
-  <header class="flex items-center justify-between mb-12">
-    <div class="flex items-center space-x-2">
-      <div class="status-indicator"></div>
-      <h1 class="text-2xl font-mono font-medium">Share Karo</h1>
-    </div>
-    <nav class="space-x-4">
-      <a href="index.html" class="text-gray-300 hover:text-white">Home</a>
-      <a href="about_us.html" class="text-gray-300 hover:text-white">About Us</a>
-      <a href="blog.html" class="text-gray-300 hover:text-white">Blog</a>
-      <a href="help.html" class="text-white font-bold">Help</a>
-    </nav>
-  </header>
+<body class="min-h-screen">
+  <canvas id="matrixCanvas" class="w-full h-full"></canvas>
 
-  <!-- Main Help Content -->
-  <main class="max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold mb-6">Need Help?</h2>
-    <p class="mb-4">Welcome to the Share Karo Help Center. If you're experiencing any issues or have questions, you're in the right place.</p>
+  <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+    <!-- Header -->
+    <header class="mb-8 panel p-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <div class="status-indicator"></div>
+          <h1 class="text-2xl font-mono font-medium">ShareKaro</h1>
+        </div>
+        <nav>
+          <ul class="flex space-x-6 text-sm">
+            <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+            <li class="relative group">
+              <a href="#" class="hover:text-blue-400">Resources</a>
+              <div class="absolute hidden group-hover:block bg-gray-800 p-2 rounded shadow-lg mt-1 w-40">
+                <a href="Blog.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">Blog</a>
+                <a href="About_us.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">About</a>
+              </div>
+            </li>
+            <li><a href="Help.html" class="text-blue-400">Help</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-    <h3 class="text-2xl font-semibold mt-8 mb-2">Frequently Asked Questions</h3>
-    <ul class="list-disc list-inside mb-6">
-      <li>How do I upload a file?</li>
-      <li>What types of files are supported?</li>
-      <li>How long are files stored?</li>
-      <li>Is my data safe?</li>
-    </ul>
+    <!-- Main Help Content -->
+    <main>
+      <section class="panel p-6 mb-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Need Help?</h2>
+        </div>
+        <p class="mb-4 text-sm">Welcome to the ShareKaro Help Center. If you're experiencing any issues or have questions, you're in the right place.</p>
 
-    <h3 class="text-2xl font-semibold mt-8 mb-2">Contact Us</h3>
-    <p>If your question wasn't answered above, feel free to contact our support team at <a href="mailto:support@Share Karo.com" class="text-blue-400 hover:underline">support@Share Karo.com</a>.</p>
-  </main>
+        <h3 class="font-semibold mt-6 mb-2">Frequently Asked Questions</h3>
+        <ul class="list-disc list-inside mb-6 text-sm space-y-2">
+          <li><strong>How do I upload a file?</strong> - Click "SELECT FILES" button, choose your files, and wait for upload to complete.</li>
+          <li><strong>What types of files are supported?</strong> - All file types are supported with no restrictions.</li>
+          <li><strong>How long are files stored?</strong> - Files are automatically deleted after 24 hours.</li>
+          <li><strong>Is my data safe?</strong> - Yes, all files are encrypted end-to-end with AES-256 encryption.</li>
+          <li><strong>What's the maximum file size?</strong> - Currently 2GB per file.</li>
+        </ul>
 
-  <!-- Footer -->
-  <footer class="mt-12 text-center text-gray-500 text-sm">
-    &copy; 2025 Share Karo. All rights reserved.
-  </footer>
+        <h3 class="font-semibold mt-6 mb-2">Contact Support</h3>
+        <p class="text-sm mb-4">If your question wasn't answered above, feel free to contact our support team:</p>
+        <button class="btn-primary font-mono py-2 px-6 rounded text-sm">
+          <a href="mailto:maharana0418@gmail.com">EMAIL SUPPORT</a>
+        </button>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
+      <p>ShareKaro | Secure File Transfer Protocol</p>
+      <p class="mt-1">© 2025 Network Operations</p>
+    </footer>
+  </div>
+
+  <!-- Matrix Animation -->
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#3a7bd5';
+      ctx.font = fontSize + 'px IBM Plex Mono';
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 35);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
