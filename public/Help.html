@@ -2,71 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Help - Share Karo</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help | Share Karo</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .status-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      background-color: #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(1.5);
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans leading-relaxed">
+<body class="min-h-screen px-6 py-8">
+  <!-- Header -->
+  <header class="flex items-center justify-between mb-12">
+    <div class="flex items-center space-x-2">
+      <div class="status-indicator"></div>
+      <h1 class="text-2xl font-mono font-medium">Share Karo</h1>
+    </div>
+    <nav class="space-x-4">
+      <a href="index.html" class="text-gray-300 hover:text-white">Home</a>
+      <a href="about_us.html" class="text-gray-300 hover:text-white">About Us</a>
+      <a href="blog.html" class="text-gray-300 hover:text-white">Blog</a>
+      <a href="help.html" class="text-white font-bold">Help</a>
+    </nav>
+  </header>
 
-  <div class="min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-gray-800 shadow-lg p-4">
-      <div class="container mx-auto flex justify-between items-center">
-        <div class="flex items-center">
-          <div class="status-indicator status-active"></div>
-          <h1 class="text-2xl font-mono font-medium">Share Karo</h1>
-        </div>
-        <nav class="space-x-4">
-          <a href="/index.html" class="text-gray-300 hover:text-white">Home</a>
-          <a href="/Blog.html" class="text-gray-300 hover:text-white">Blog</a>
-          <a href="/About_us.html" class="text-gray-300 hover:text-white">About</a>
-          <a href="/Help.html" class="text-white font-semibold">Help</a>
-        </nav>
-      </div>
-    </header>
+  <!-- Main Help Content -->
+  <main class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6">Need Help?</h2>
+    <p class="mb-4">Welcome to the Share Karo Help Center. If you're experiencing any issues or have questions, you're in the right place.</p>
 
-    <!-- Main content -->
-    <main class="flex-grow container mx-auto px-4 py-12">
-      <h2 class="text-4xl font-bold mb-4 text-center">Need Help?</h2>
-      <p class="text-lg mb-8 text-center text-gray-400">
-        Share Karo is designed to be easy to use, but if you’re stuck, this page is here to help you out.
-      </p>
+    <h3 class="text-2xl font-semibold mt-8 mb-2">Frequently Asked Questions</h3>
+    <ul class="list-disc list-inside mb-6">
+      <li>How do I upload a file?</li>
+      <li>What types of files are supported?</li>
+      <li>How long are files stored?</li>
+      <li>Is my data safe?</li>
+    </ul>
 
-      <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-        <h3 class="text-2xl font-semibold mb-4">How to Use Share Karo:</h3>
-        <ol class="list-decimal pl-6 space-y-2 text-gray-300">
-          <li>Click the "Upload" button on the homepage.</li>
-          <li>Select the file you want to upload.</li>
-          <li>Once uploaded, you’ll get a unique shareable link.</li>
-          <li>Share the link with anyone — it will be valid until the file expires or is deleted.</li>
-        </ol>
-      </div>
+    <h3 class="text-2xl font-semibold mt-8 mb-2">Contact Us</h3>
+    <p>If your question wasn't answered above, feel free to contact our support team at <a href="mailto:support@Share Karo.com" class="text-blue-400 hover:underline">support@Share Karo.com</a>.</p>
+  </main>
 
-      <div class="mt-10 bg-gray-800 p-6 rounded-lg shadow-md">
-        <h3 class="text-2xl font-semibold mb-4">FAQs</h3>
-        <div class="space-y-4 text-gray-300">
-          <div>
-            <strong>Q: Is my file secure?</strong>
-            <p>A: Yes. Files are temporarily stored and automatically deleted after expiry.</p>
-          </div>
-          <div>
-            <strong>Q: Is there a file size limit?</strong>
-            <p>A: Currently, files up to 10MB are supported.</p>
-          </div>
-          <div>
-            <strong>Q: How long are the files stored?</strong>
-            <p>A: Files are automatically deleted after 24 hours or after the first download, whichever comes first.</p>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-center text-gray-400 py-4">
-      &copy; 2025 Share Karo. All rights reserved.
-    </footer>
-  </div>
-
+  <!-- Footer -->
+  <footer class="mt-12 text-center text-gray-500 text-sm">
+    &copy; 2025 Share Karo. All rights reserved.
+  </footer>
 </body>
 </html>
