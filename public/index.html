@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Share Karo</title>
+    <meta name="description" content="ShareKaro - Secure file and text sharing platform with encrypted transfers and temporary access codes">
+    <meta name="keywords" content="file sharing, secure transfer, text sharing, file upload, file download, temporary storage, encrypted sharing, access codes, online file transfer">
+    <title>Share Karo - Secure File & Text Sharing</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/bR2QHWG7/Chat-GPT-Image-Jul-21-2025-04-54-13-PM.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -139,7 +141,7 @@
         <div id="fileCodesList" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
       </section>
 
-      <!-- 🆕 Text Sharing Section -->
+      <!-- Text Sharing Section -->
       <section class="panel p-6 mt-6">
         <div class="header-accent pb-2 mb-4">
           <h2 class="text-lg font-mono font-medium">Share Text</h2>
@@ -261,7 +263,7 @@
         alert(`Code ${code} copied to clipboard`);
       }
 
-      // 🆕 Text Sharing Logic
+      // Text Sharing Logic
       document.getElementById("shareTextBtn").addEventListener("click", async () => {
         const text = document.getElementById("textInput").value.trim();
         if (!text) return alert("Please enter some text");
