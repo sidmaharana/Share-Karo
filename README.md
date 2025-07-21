@@ -1,5 +1,5 @@
-# Seamless Share - Temporary File Transfer Service
-https://seamless-share.onrender.com/
+# Share Karo - Temporary File Transfer Service
+https://www.sharekaro.site/
 
 A lightweight file sharing application that allows users to upload files and share them via a 6-digit code. Files are automatically deleted after 3 minutes for security and storage optimization.
 
@@ -23,7 +23,7 @@ A lightweight file sharing application that allows users to upload files and sha
 1. Clone the repository:
    ```
    git clone https://github.com/yourusername/Seamless-Share.git
-   cd Seamless Share
+   cd Share Karo
    ```
 
 2. Install dependencies:
@@ -33,7 +33,7 @@ A lightweight file sharing application that allows users to upload files and sha
 
 3. Create a `.env` file in the root directory and add your MongoDB connection string:
    ```
-   MONGO_URI=mongodb://localhost:27017/Seamless Share
+   MONGO_URI=mongodb://localhost:27017/Share Karo
    PORT=5000
    ```
 
