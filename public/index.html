@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SeamlessShare</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/HLrv53Tf/Seamless-Share-Logo-Design.png" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
       body {
         background: #121212;
@@ -14,7 +14,6 @@
         font-family: 'IBM Plex Mono', 'Courier New', monospace;
         overflow-x: hidden;
       }
-
       canvas {
         position: fixed;
         top: 0;
@@ -22,7 +21,6 @@
         z-index: 0;
         pointer-events: none;
       }
-
       .panel {
         background: #1e1e1e;
         border: 1px solid #333;
@@ -31,94 +29,51 @@
         z-index: 10;
         position: relative;
       }
-
-      .header-accent {
-        border-bottom: 2px solid #3a7bd5;
-      }
-
+      .header-accent { border-bottom: 2px solid #3a7bd5; }
       .btn-primary {
-        background: #3a7bd5;
-        color: white;
-        transition: all 0.2s;
+        background: #3a7bd5; color: white; transition: all 0.2s;
       }
-
-      .btn-primary:hover {
-        background: #2c5fb3;
-      }
-
+      .btn-primary:hover { background: #2c5fb3; }
       .btn-secondary {
-        background: #2d3748;
-        color: white;
-        transition: all 0.2s;
+        background: #2d3748; color: white; transition: all 0.2s;
       }
-
-      .btn-secondary:hover {
-        background: #4a5568;
-      }
-
-      .status-indicator {
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 6px;
-      }
-
-      .status-active {
-        background: #48bb78;
-        box-shadow: 0 0 8px #48bb78;
-      }
-
+      .btn-secondary:hover { background: #4a5568; }
       .code-display {
-        font-family: 'IBM Plex Mono', monospace;
-        background: #2d3748;
-        color: #f7fafc;
-        padding: 8px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 0.2s;
+        background: #2d3748; color: #f7fafc;
+        padding: 8px 12px; border-radius: 4px;
+        cursor: pointer; transition: all 0.2s;
       }
-
-      .code-display:hover {
-        background: #4a5568;
-      }
-
+      .code-display:hover { background: #4a5568; }
       .progress-track {
-        background: #2d3748;
-        height: 6px;
-        border-radius: 3px;
+        background: #2d3748; height: 6px; border-radius: 3px;
       }
-
       .progress-bar {
         background: linear-gradient(90deg, #3a7bd5, #00d2ff);
-        height: 6px;
-        border-radius: 3px;
-        transition: width 0.3s ease;
+        height: 6px; border-radius: 3px; transition: width 0.3s ease;
       }
-
-      input[type="text"] {
+      input[type="text"], textarea {
         background: #2d3748;
         border: 1px solid #4a5568;
         color: white;
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        resize: vertical;
       }
-
-      input[type="text"]:focus {
-        outline: none;
-        border-color: #3a7bd5;
+      input[type="text"]:focus, textarea:focus {
+        outline: none; border-color: #3a7bd5;
       }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-screen">
     <canvas id="matrixCanvas" class="w-full h-full"></canvas>
 
     <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+
       <!-- Header -->
       <header class="mb-8 panel p-4">
         <div class="flex justify-between items-center">
-          <div class="flex items-center">
-            <h1 class="text-2xl font-mono font-medium">SeamlessShare</h1>
-          </div>
+          <h1 class="text-2xl font-mono font-medium">SeamlessShare</h1>
           <nav>
             <ul class="flex space-x-6 text-sm">
               <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
@@ -135,8 +90,9 @@
         </div>
       </header>
 
-      <!-- Main Content -->
+      <!-- Main Grid -->
       <main class="grid md:grid-cols-2 gap-6">
+
         <!-- Upload Panel -->
         <section class="panel p-6">
           <div class="header-accent pb-2 mb-4">
@@ -144,18 +100,13 @@
           </div>
 
           <input type="file" id="fileInput" class="hidden" multiple />
-          <div class="mb-4">
-            <button id="selectFilesBtn" class="btn-primary font-mono py-2 px-6 rounded text-sm">
-              SELECT FILES
-            </button>
-          </div>
+          <button id="selectFilesBtn" class="btn-primary font-mono py-2 px-6 rounded text-sm mb-4">
+            SELECT FILES
+          </button>
 
-          <div class="mb-2">
-            <div class="progress-track">
-              <div id="progress" class="progress-bar" style="width: 0%"></div>
-            </div>
+          <div class="progress-track mb-2">
+            <div id="progress" class="progress-bar" style="width: 0%"></div>
           </div>
-
           <p id="uploadStatus" class="text-xs text-gray-400 font-mono mb-4">Status: Ready</p>
         </section>
 
@@ -164,12 +115,8 @@
           <div class="header-accent pb-2 mb-4">
             <h2 class="text-lg font-mono font-medium">File Download</h2>
           </div>
-
-          <div class="mb-4">
-            <input type="text" id="fileCodeInput" placeholder="Enter 6-digit access code" 
-                   class="w-full p-2 rounded text-sm font-mono" />
-          </div>
-
+          <input type="text" id="fileCodeInput" placeholder="Enter 6-digit access code"
+                 class="p-2 rounded text-sm font-mono mb-4" />
           <button id="downloadBtn" class="btn-secondary w-full font-mono py-2 rounded text-sm">
             INITIATE DOWNLOAD
           </button>
@@ -181,17 +128,31 @@
         <div class="header-accent pb-2 mb-4">
           <h2 class="text-lg font-mono font-medium">Uploaded Files</h2>
         </div>
-
         <ul id="uploadedFilesList" class="space-y-2 text-sm font-mono"></ul>
       </section>
 
-      <!-- File Codes -->
+      <!-- Access Codes -->
       <section id="fileCodesContainer" class="panel p-6 mt-4 hidden">
         <div class="header-accent pb-2 mb-4">
           <h2 class="text-lg font-mono font-medium">Access Codes</h2>
         </div>
-
         <div id="fileCodesList" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+      </section>
+
+      <!-- 🆕 Text Sharing Section -->
+      <section class="panel p-6 mt-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Share Text</h2>
+        </div>
+        <textarea id="textInput" rows="4" placeholder="Enter your text here..." class="mb-4"></textarea>
+        <button id="shareTextBtn" class="btn-primary w-full font-mono py-2 rounded text-sm mb-4">GENERATE CODE</button>
+        <p id="textCodeDisplay" class="text-sm font-mono mb-4"></p>
+
+        <hr class="my-4 border-gray-600" />
+
+        <input type="text" id="textCodeInput" placeholder="Enter code to retrieve text" class="mb-4" />
+        <button id="retrieveTextBtn" class="btn-secondary w-full font-mono py-2 rounded text-sm mb-4">RETRIEVE TEXT</button>
+        <pre id="retrievedText" class="whitespace-pre-wrap text-sm font-mono text-green-300 mt-2"></pre>
       </section>
 
       <!-- Footer -->
@@ -201,11 +162,10 @@
       </footer>
     </div>
 
-    <!-- Matrix Animation Script -->
+    <!-- Matrix Animation -->
     <script>
       const canvas = document.getElementById('matrixCanvas');
       const ctx = canvas.getContext('2d');
-
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
@@ -217,55 +177,44 @@
       function draw() {
         ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
         ctx.fillStyle = '#3a7bd5';
         ctx.font = fontSize + 'px IBM Plex Mono';
-
         for (let i = 0; i < drops.length; i++) {
           const text = letters[Math.floor(Math.random() * letters.length)];
           ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
           drops[i]++;
         }
       }
-
       setInterval(draw, 35);
-
       window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       });
     </script>
 
-    <!-- Existing JS -->
+    <!-- Upload/Download Logic -->
     <script>
-      document.getElementById("selectFilesBtn").addEventListener("click", function () {
-        document.getElementById("fileInput").click();
-      });
+      document.getElementById("selectFilesBtn").addEventListener("click", () =>
+        document.getElementById("fileInput").click()
+      );
 
       document.getElementById("fileInput").addEventListener("change", async function () {
-        const fileInput = this;
+        const files = this.files;
         const statusText = document.getElementById("uploadStatus");
-        const uploadedFilesContainer = document.getElementById("uploadedFilesContainer");
         const uploadedFilesList = document.getElementById("uploadedFilesList");
-        const fileCodesContainer = document.getElementById("fileCodesContainer");
         const fileCodesList = document.getElementById("fileCodesList");
         const progressBar = document.getElementById("progress");
+        const uploadedFilesContainer = document.getElementById("uploadedFilesContainer");
+        const fileCodesContainer = document.getElementById("fileCodesContainer");
 
-        if (!fileInput.files.length) {
-          statusText.innerText = "Status: No files selected";
-          return;
-        }
+        if (!files.length) return;
 
         statusText.innerText = "Status: Uploading...";
         uploadedFilesList.innerHTML = "";
         fileCodesList.innerHTML = "";
         uploadedFilesContainer.classList.remove("hidden");
         fileCodesContainer.classList.remove("hidden");
-        progressBar.style.width = "0%";
 
         let progress = 0;
         const interval = setInterval(() => {
@@ -274,40 +223,37 @@
           if (progress >= 100) clearInterval(interval);
         }, 300);
 
-        for (let file of fileInput.files) {
+        for (let file of files) {
           const formData = new FormData();
           formData.append("file", file);
-
           try {
-            const response = await fetch("/upload", {
-              method: "POST",
-              body: formData,
-            });
-
+            const response = await fetch("/upload", { method: "POST", body: formData });
             const result = await response.json();
+            const item = document.createElement("li");
             if (response.ok) {
-              const item = document.createElement("li");
-              item.innerHTML = `<span class="text-green-500">✓</span> ${file.name} <span class="text-gray-500 text-xs">(${(file.size/1024/1024).toFixed(2)} MB)</span>`;
-              uploadedFilesList.appendChild(item);
-
+              item.innerHTML = `✓ ${file.name} <span class="text-gray-500 text-xs">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>`;
               const codeDiv = document.createElement("div");
               codeDiv.textContent = result.fileCode;
               codeDiv.classList.add("code-display");
               codeDiv.onclick = () => copyToClipboard(result.fileCode);
               fileCodesList.appendChild(codeDiv);
             } else {
-              const item = document.createElement("li");
-              item.innerHTML = `<span class="text-red-500">✗</span> ${file.name} - ${result.error}`;
-              uploadedFilesList.appendChild(item);
+              item.innerHTML = `✗ ${file.name} - ${result.error}`;
             }
+            uploadedFilesList.appendChild(item);
           } catch {
             const item = document.createElement("li");
-            item.innerHTML = `<span class="text-red-500">✗</span> ${file.name} - Upload failed`;
+            item.innerHTML = `✗ ${file.name} - Upload failed`;
             uploadedFilesList.appendChild(item);
           }
         }
-
         statusText.innerText = "Status: Upload complete";
+      });
+
+      document.getElementById("downloadBtn").addEventListener("click", () => {
+        const code = document.getElementById("fileCodeInput").value.trim();
+        if (!code) return alert("Enter a file access code");
+        window.location.href = `/download/${code}`;
       });
 
       function copyToClipboard(code) {
@@ -315,13 +261,33 @@
         alert(`Code ${code} copied to clipboard`);
       }
 
-      document.getElementById("downloadBtn").addEventListener("click", function () {
-        const fileCode = document.getElementById("fileCodeInput").value.trim();
-        if (!fileCode) {
-          alert("Enter a file access code");
-          return;
+      // 🆕 Text Sharing Logic
+      document.getElementById("shareTextBtn").addEventListener("click", async () => {
+        const text = document.getElementById("textInput").value.trim();
+        if (!text) return alert("Please enter some text");
+        const res = await fetch("/share-text", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          document.getElementById("textCodeDisplay").textContent = `Access Code: ${data.code}`;
+        } else {
+          alert(data.error || "Failed to share text");
         }
-        window.location.href = `/download/${fileCode}`;
+      });
+
+      document.getElementById("retrieveTextBtn").addEventListener("click", async () => {
+        const code = document.getElementById("textCodeInput").value.trim();
+        if (!code) return alert("Enter a text access code");
+        const res = await fetch(`/get-text/${code}`);
+        const data = await res.json();
+        if (res.ok) {
+          document.getElementById("retrievedText").textContent = data.text;
+        } else {
+          document.getElementById("retrievedText").textContent = "Text not found or expired.";
+        }
       });
     </script>
   </body>
