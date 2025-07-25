@@ -35,3 +35,4 @@ build/
 credentials.json
 *credentials*.json
 secret*.json
+.env
