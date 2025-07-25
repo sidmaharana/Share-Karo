@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Engineering Blog | Share Karo</title>
+  <title>Support Us | Share Karo</title>
   <link rel="icon" type="image/png" href="Share-Karo_Logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     body {
       background: #121212;
@@ -31,123 +32,65 @@
     .header-accent {
       border-bottom: 2px solid #3a7bd5;
     }
-    .status-indicator {
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 6px;
-      background-color: #10b981;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.5); }
-    }
-    .blog-card {
-      background: #2d3748;
-      border-left: 3px solid #3a7bd5;
-      padding: 20px;
-      margin-bottom: 20px;
-      transition: all 0.2s;
-    }
-    .blog-card:hover {
-      background: #4a5568;
-      transform: translateY(-2px);
-    }
-    .blog-title {
-      color: #3a7bd5;
-      font-weight: 500;
-      margin-bottom: 12px;
-      font-size: 18px;
-    }
-    .blog-date {
-      color: #718096;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-    .blog-excerpt {
-      color: #a0aec0;
-      font-size: 14px;
-      line-height: 1.6;
-    }
     .btn-primary {
-      background: #3a7bd5;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: all 0.2s;
+      background: #3a7bd5; color: white; transition: all 0.2s;
     }
-    .btn-primary:hover {
-      background: #2c5fb3;
-    }
+    .btn-primary:hover { background: #2c5fb3; }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body class="min-h-screen">
   <canvas id="matrixCanvas" class="w-full h-full"></canvas>
 
-  <div class="container mx-auto px-4 py-8 max-w-4xl relative z-10">
+  <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
     <!-- Header -->
     <header class="mb-8 panel p-4">
       <div class="flex justify-between items-center">
         <a href="index.html" class="flex items-center space-x-2">
-          <img src="Share-Karo_Logo.png" alt="ShareKaro Logo" class="h-8">
-          <span class="text-2xl font-mono font-medium text-blue-400">ShareKaro</span>
-        </a>
+            <img src="Share-Karo_Logo.png" alt="ShareKaro Logo" class="h-8">
+            <span class="text-2xl font-mono font-medium text-blue-400">ShareKaro</span>
+          </a>
         <nav>
           <ul class="flex flex-col space-y-2 md:flex-row md:space-x-6 md:space-y-0 text-sm">
             <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
-            
-            <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
-            <li><a href="developers.html" class="hover:text-blue-400">Developers</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Support Us Section -->
     <main>
       <section class="panel p-6 mb-6">
         <div class="header-accent pb-2 mb-4">
-          <h2 class="text-lg font-mono font-medium">Engineering Blog</h2>
+          <h2 class="text-lg font-mono font-medium">Support ShareKaro</h2>
         </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-06-18 | TECHNOLOGY</div>
-          <h3 class="blog-title">The Architecture Behind Share Karo</h3>
-          <p class="blog-excerpt">
-            A deep dive into the distributed systems architecture that powers our file sharing platform, including our use of edge computing to reduce latency and improve transfer speeds globally.
+        <div class="text-sm leading-relaxed space-y-4">
+          <p>
+            ShareKaro is a free service, built and maintained by a small team of dedicated developers. Your support helps us cover server costs, development time, and continuous improvements to keep ShareKaro fast, secure, and reliable for everyone.
           </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
-        </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-05-22 | SECURITY</div>
-          <h3 class="blog-title">Implementing End-to-End Encryption</h3>
-          <p class="blog-excerpt">
-            How we designed our encryption system to ensure files are encrypted before they leave your device and can only be decrypted by the intended recipient, with no backdoors.
+          <p>
+            Every contribution, no matter how small, makes a significant difference and is deeply appreciated!
           </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
-        </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-04-15 | UX DESIGN</div>
-          <h3 class="blog-title">Minimalist Interface for Maximum Usability</h3>
-          <p class="blog-excerpt">
-            Exploring the design philosophy behind our terminal-inspired interface and how we balance simplicity with powerful functionality for both novice and power users.
+
+          <h3 class="font-semibold mt-6 mb-2">Support via Indian Payment Systems</h3>
+          <p>
+            You can support us using popular Indian payment methods:
           </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
-        </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-03-08 | PERFORMANCE</div>
-          <h3 class="blog-title">Optimizing Large File Transfers</h3>
-          <p class="blog-excerpt">
-            The techniques we use to handle large file transfers efficiently, including chunked uploads, parallel processing, and adaptive compression algorithms.
-          </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
+          <div class="flex flex-col space-y-4 mt-4">
+            <a href="upi://pay?pa=maharana0418@oksbi&pn=ShareKaro%20Support&mc=0000&tid=YOUR_TRANSACTION_ID&tr=YOUR_TRANSACTION_REF&am=100&cu=INR" class="btn-primary py-3 px-6 rounded text-base text-center">Pay with UPI (Google Pay, PhonePe, Paytm UPI)</a>
+            <p class="text-xs text-gray-400 mt-2">Alternatively, scan this QR code with any UPI app:</p>
+            <img src="https://via.placeholder.com/150?text=Scan+for+UPI" alt="UPI QR Code" class="mx-auto mt-2" style="width: 150px;">
+            <p class="text-sm mt-2"><strong>Our UPI ID:</strong> <code>maharana0418@oksbi</code></p>
+
+            <a href="https://paytm.me/YOUR_PAYTM_LINK" class="btn-primary py-3 px-6 rounded text-base text-center">Pay with Paytm</a>
+
+            <button id="rzp-button1" class="btn-primary py-3 px-6 rounded text-base text-center">Pay with Razorpay</button>
+          </div>
+
+          <h3 class="font-semibold mt-6 mb-2">Other Ways to Support</h3>
+          <ul class="list-disc list-inside ml-4">
+            <li>Spread the word about ShareKaro to your friends and colleagues.</li>
+            <li>Report bugs and suggest new features on our <a href="https://github.com/sidmaharana/Share-Karo" class="text-blue-400 hover:underline">GitHub repository</a>.</li>
+          </ul>
         </div>
       </section>
     </main>
@@ -159,7 +102,6 @@
           <h3 class="text-sm font-medium text-white mb-3">Quick Links</h3>
           <ul class="space-y-2">
             <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
-            
           </ul>
         </div>
         <div>
@@ -176,7 +118,6 @@
             <li><a href="legal_contact.html" class="hover:text-blue-400">Legal & Contact</a></li>
             <li><a href="privacy_policy.html" class="hover:text-blue-400">Privacy Policy</a></li>
             <li><a href="terms_conditions.html" class="hover:text-blue-400">Terms & Conditions</a></li>
-            
           </ul>
         </div>
       </div>
@@ -188,13 +129,13 @@
       </div>
 
       <div class="mt-6 text-center text-gray-500">
-        <p>Share Karo | Secure File Transfer Protocol</p>
+        <p>ShareKaro | Secure File Transfer Protocol</p>
         <p class="mt-1">© 2025 Network Operations</p>
       </div>
     </footer>
   </div>
 
-  <!-- Matrix Animation -->
+  <!-- Matrix Animation Background -->
   <script>
     const canvas = document.getElementById('matrixCanvas');
     const ctx = canvas.getContext('2d');
@@ -223,6 +164,43 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
+  </script>
+
+  <!-- Razorpay Integration -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    var rzp1;
+
+    document.getElementById('rzp-button1').onclick = function(e){
+      var options = {
+          "key": "YOUR_RAZORPAY_KEY_ID", // Replace with your actual Key ID
+          "amount": "10000", // Amount in paise (e.g., 10000 = INR 100.00)
+          "currency": "INR",
+          "name": "ShareKaro Support",
+          "description": "Support for ShareKaro Development",
+          "image": "Share-Karo_Logo.png", // Optional: Your logo
+          "handler": function (response){
+              alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+              // IMPORTANT: For production, you MUST send response.razorpay_payment_id, response.razorpay_order_id, and response.razorpay_signature to your backend server for verification.
+              // Your backend should then verify the signature using your Razorpay Key Secret.
+              // This step is crucial for security to prevent tampering.
+          },
+          "prefill": {
+              "name": "", // Optional: Pre-fill user's name
+              "email": "", // Optional: Pre-fill user's email
+              "contact": "" // Optional: Pre-fill user's phone number
+          },
+          "notes": {
+              "purpose": "Website Support"
+          },
+          "theme": {
+              "color": "#3a7bd5"
+          }
+      };
+      rzp1 = new Razorpay(options);
+      rzp1.open();
+      e.preventDefault();
+    };
   </script>
 </body>
 </html>

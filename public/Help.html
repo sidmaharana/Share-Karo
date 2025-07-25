@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Help | ShareKaro</title>
+  <link rel="icon" type="image/png" href="Share-Karo_Logo.png" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -53,21 +54,16 @@
     <!-- Header -->
     <header class="mb-8 panel p-4">
       <div class="flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-          <div class="status-indicator"></div>
-          <h1 class="text-2xl font-mono font-medium">ShareKaro</h1>
-        </div>
+        <a href="index.html" class="flex items-center space-x-2">
+          <img src="Share-Karo_Logo.png" alt="ShareKaro Logo" class="h-8">
+          <span class="text-2xl font-mono font-medium text-blue-400">ShareKaro</span>
+        </a>
         <nav>
-          <ul class="flex space-x-6 text-sm">
+          <ul class="flex flex-col space-y-2 md:flex-row md:space-x-6 md:space-y-0 text-sm">
             <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
-            <li class="relative group">
-              <a href="#" class="hover:text-blue-400">Resources</a>
-              <div class="absolute hidden group-hover:block bg-gray-800 p-2 rounded shadow-lg mt-1 w-40">
-                <a href="Blog.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">Blog</a>
-                <a href="About_us.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">About</a>
-              </div>
-            </li>
+            
             <li><a href="Help.html" class="text-blue-400">Help</a></li>
+            <li><a href="developers.html" class="hover:text-blue-400">Developers</a></li>
           </ul>
         </nav>
       </div>
@@ -83,11 +79,66 @@
 
         <h3 class="font-semibold mt-6 mb-2">Frequently Asked Questions</h3>
         <ul class="list-disc list-inside mb-6 text-sm space-y-2">
-          <li><strong>How do I upload a file?</strong> - Click "SELECT FILES" button, choose your files, and wait for upload to complete.</li>
-          <li><strong>What types of files are supported?</strong> - All file types are supported with no restrictions.</li>
-          <li><strong>How long are files stored?</strong> - Files are automatically deleted after 3 minutes.</li>
-          <li><strong>Is my data safe?</strong> - Yes, all files are encrypted end-to-end with AES-256 encryption.</li>
-          <li><strong>What's the maximum file size?</strong> - Currently 200 MB file.</li>
+          <li>
+            <strong>How do I upload a file?</strong>
+            <p class="ml-4">On the main page, locate the "File Upload" section. Click the "SELECT FILES" button. A file explorer window will open, allowing you to select one or more files from your device. Once selected, the upload process will begin automatically, and you'll see a progress bar. Upon successful upload, a unique 6-digit access code will be generated for each file, which you can share for downloading.</p>
+          </li>
+          <li>
+            <strong>How do I download a file?</strong>
+            <p class="ml-4">In the "File Download" section on the main page, enter the 6-digit access code provided by the uploader into the input field. Click the "INITIATE DOWNLOAD" button. Your browser will then prompt you to save the file to your device.</p>
+          </li>
+          <li>
+            <strong>What types of files are supported?</strong>
+            <p class="ml-4">ShareKaro supports all file types without any restrictions. You can upload documents, images, videos, archives, and more.</p>
+          </li>
+          <li>
+            <strong>How long are files stored?</strong>
+            <p class="ml-4">For your privacy and to manage storage efficiently, all uploaded files are automatically deleted from our servers after 3 minutes from the time of upload. Please ensure the recipient downloads the file within this timeframe.</p>
+          </li>
+          <li>
+            <strong>Is my data safe?</strong>
+            <p class="ml-4">Yes, your data security is our top priority. All files transferred through ShareKaro are encrypted end-to-end with AES-256 encryption. This means your files are encrypted on your device before being sent and can only be decrypted by the intended recipient, ensuring your data remains private and secure.</p>
+          </li>
+          <li>
+            <strong>What's the maximum file size?</strong>
+            <p class="ml-4">The current maximum file size for uploads is 10 MB. Files exceeding this limit will not be uploaded.</p>
+          </li>
+        </ul>
+
+        <h3 class="font-semibold mt-6 mb-2">How to Share Text</h3>
+        <ul class="list-disc list-inside mb-6 text-sm space-y-2">
+          <li>
+            <strong>How do I share text?</strong>
+            <p class="ml-4">Navigate to the "Share Text" section. Type or paste your text into the provided text area. Click the "GENERATE CODE" button. A short access code will be displayed, which you can share with others.</p>
+          </li>
+          <li>
+            <strong>How do I retrieve shared text?</strong>
+            <p class="ml-4">In the "Share Text" section, locate the input field for retrieving text. Enter the access code you received. Click the "RETRIEVE TEXT" button, and the shared text will appear below.</p>
+          </li>
+          <li>
+            <strong>How long is shared text stored?</strong>
+            <p class="ml-4">Shared text snippets are stored for 10 minutes before being automatically deleted to ensure privacy and efficient resource management.</p>
+          </li>
+        </ul>
+
+        <h3 class="font-semibold mt-6 mb-2">Troubleshooting Tips</h3>
+        <ul class="list-disc list-inside mb-6 text-sm space-y-2">
+          <li>
+            <strong>File upload failed:</strong>
+            <p class="ml-4">Check your internet connection. Ensure the file size does not exceed 10 MB. If the issue persists, try again or contact support.</p>
+          </li>
+          <li>
+            <strong>File not found/expired:</strong>
+            <p class="ml-4">This usually means the 3-minute storage limit for the file has passed, or the access code was incorrect. Please ask the sender to re-upload the file and provide a new code.</p>
+          </li>
+          <li>
+            <strong>Text not found/expired:</strong>
+            <p class="ml-4">Similar to files, shared text has a 10-minute expiry. Verify the code is correct and ask the sender to re-share if necessary.</p>
+          </li>
+          <li>
+            <strong>Page not loading correctly:</strong>
+            <p class="ml-4">Try clearing your browser's cache and cookies, or try accessing ShareKaro from a different browser.</p>
+          </li>
         </ul>
 
         <h3 class="font-semibold mt-6 mb-2">Contact Support</h3>
@@ -99,9 +150,44 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
-      <p>ShareKaro | Secure File Transfer Protocol</p>
-      <p class="mt-1">© 2025 Network Operations</p>
+    <footer class="mt-8 panel p-6 text-xs text-gray-400 font-mono">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+            
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">About Us</h3>
+          <ul class="space-y-2">
+            <li><a href="About_us.html" class="hover:text-blue-400">About Us</a></li>
+            <li><a href="developers.html" class="hover:text-blue-400">Join Our Team</a></li>
+            <li><a href="Help.html" class="hover:text-blue-400">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">Legal & Contact</h3>
+          <ul class="space-y-2">
+            <li><a href="legal_contact.html" class="hover:text-blue-400">Legal & Contact</a></li>
+            <li><a href="privacy_policy.html" class="hover:text-blue-400">Privacy Policy</a></li>
+            <li><a href="terms_conditions.html" class="hover:text-blue-400">Terms & Conditions</a></li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-right">
+          <p class="mt-4"><a href="https://github.com/sidmaharana/Share-Karo" class="hover:text-blue-400">Report a bug</a></p>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center text-gray-500">
+        <p>ShareKaro | Secure File Transfer Protocol</p>
+        <p class="mt-1">© 2025 Network Operations</p>
+      </div>
     </footer>
   </div>
 

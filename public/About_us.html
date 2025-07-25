@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us | Share Karo</title>
-  <link rel="icon" type="image/png" href="https://i.ibb.co/HLrv53Tf/Seamless-Share-Logo-Design.png" />
+  <link rel="icon" type="image/png" href="Share-Karo_Logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
@@ -78,21 +78,13 @@
     <!-- Header -->
     <header class="mb-8 panel p-4">
       <div class="flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-          <div class="status-indicator"></div>
-          <h1 class="text-2xl font-mono font-medium">Share Karo</h1>
-        </div>
+        <a href="index.html" class="flex items-center space-x-2">
+            <img src="Share-Karo_Logo.png" alt="ShareKaro Logo" class="h-8">
+            <span class="text-2xl font-mono font-medium text-blue-400">ShareKaro</span>
+          </a>
         <nav>
-          <ul class="flex space-x-6 text-sm">
+          <ul class="flex flex-col space-y-2 md:flex-row md:space-x-6 md:space-y-0 text-sm">
             <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
-            <li class="relative group">
-              <a href="#" class="hover:text-blue-400">Resources</a>
-              <div class="absolute hidden group-hover:block bg-gray-800 p-2 rounded shadow-lg mt-1 w-40">
-                <a href="Blog.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">Blog</a>
-                <a href="About_us.html" class="block px-3 py-1 hover:bg-gray-700 rounded text-sm">About</a>
-              </div>
-            </li>
-            <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
           </ul>
         </nav>
       </div>
@@ -106,16 +98,90 @@
         </div>
         <div class="text-sm leading-relaxed space-y-4">
           <p>
-            Share Karo is a secure, intuitive, and privacy-first file sharing platform built by passionate developers who believe in simple, secure file transfers.
+            ShareKaro is more than just a file-sharing platform; it's a commitment to secure, intuitive, and privacy-first digital interactions. Born from a passion for seamless data exchange, our platform is meticulously crafted by a team of dedicated developers who believe that sharing information should be simple, fast, and unequivocally secure.
           </p>
           <p>
-            Our mission is to provide lightning-fast file transfer without compromising security. We leverage <strong>end-to-end encryption</strong> and a <strong>zero-knowledge architecture</strong> to make sure your data remains private and in your control.
+            Our core mission is to provide lightning-fast file and text transfers without ever compromising on security. We achieve this through the rigorous implementation of <strong>end-to-end encryption</strong> and a robust <strong>zero-knowledge architecture</strong>. This means your data is encrypted on your device before it even leaves your control, and only the intended recipient can decrypt it. We never store your unencrypted data, ensuring your privacy remains paramount.
           </p>
           <p>
-            With our innovative matrix-themed UI, minimalistic approach, and robust backend architecture, Share Karo offers a unique experience for students, developers, and professionals alike.
+            With its distinctive matrix-themed user interface, minimalistic design philosophy, and a powerful, resilient backend infrastructure, ShareKaro offers a truly unique and efficient experience. Whether you're a student collaborating on projects, a developer sharing code snippets, or a professional exchanging sensitive documents, ShareKaro is designed to meet your needs with unparalleled reliability.
           </p>
           <p>
-            The platform supports both file and text sharing with automatic expiration after 24 hours, ensuring your data doesn't linger unnecessarily on our servers.
+            Beyond just files, our platform also supports instant text sharing, allowing for quick and secure exchange of messages or notes. Both file and text shares come with automatic expiration timers (3 minutes for files, 10 minutes for text), ensuring that your data doesn't linger unnecessarily on our servers, further enhancing your privacy and data hygiene.
+          </p>
+        </div>
+      </section>
+
+      <!-- Our Vision Section -->
+      <section class="panel p-6 mb-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Our Vision</h2>
+        </div>
+        <div class="text-sm leading-relaxed space-y-4">
+          <p>
+            Our vision for ShareKaro extends beyond current capabilities. We aim to become the go-to platform for all forms of secure digital sharing, continuously innovating to integrate cutting-edge security protocols and user-centric features. We envision a world where digital sharing is not only effortless but also inherently trustworthy, empowering individuals and organizations to connect and collaborate without fear of data breaches or privacy infringements.
+          </p>
+          <p>
+            We are committed to fostering a community built on trust and transparency, where user feedback directly shapes our development roadmap. Our long-term goal is to expand ShareKaro's ecosystem, introducing advanced features while staying true to our foundational principles of simplicity, speed, and ironclad security.
+          </p>
+        </div>
+      </section>
+
+      <!-- Our Values Section -->
+      <section class="panel p-6 mb-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Our Values</h2>
+        </div>
+        <div class="text-sm leading-relaxed space-y-4">
+          <ul class="list-disc list-inside">
+            <li><strong>Privacy First:</strong> We design and build with your privacy as the absolute highest priority. Your data is yours, and we ensure it stays that way.</li>
+            <li><strong>Security Without Compromise:</strong> We employ industry-leading encryption and security practices to protect your information from unauthorized access.</li>
+            <li><strong>Simplicity & Intuition:</strong> We believe powerful tools should be easy to use. Our interface is designed for clarity and efficiency.</li>
+            <li><strong>Speed & Efficiency:</strong> We optimize every aspect of our platform to deliver rapid file and text transfers, saving you time.</li>
+            <li><strong>Transparency:</strong> We are open about our technology and processes, building trust through clear communication.</li>
+            <li><strong>Continuous Improvement:</strong> We are constantly learning, adapting, and enhancing ShareKaro based on technological advancements and user feedback.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Technology Stack Section -->
+      <section class="panel p-6 mb-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Technology Behind ShareKaro</h2>
+        </div>
+        <div class="text-sm leading-relaxed space-y-4">
+          <p>
+            ShareKaro is built on a robust and modern technology stack designed for performance, scalability, and security:
+          </p>
+          <ul class="list-disc list-inside">
+            <li><strong>Backend:</strong> Node.js with Express.js for a fast, scalable, and efficient server-side application.</li>
+            <li><strong>Database:</strong> MongoDB, leveraging GridFS for efficient storage and retrieval of large files, and standard collections for text data.</li>
+            <li><strong>Cloud Infrastructure:</strong> Deployed on a resilient cloud platform to ensure high availability and global accessibility.</li>
+            <li><strong>Frontend:</strong> HTML5, Tailwind CSS for a responsive and modern design, and vanilla JavaScript for dynamic interactions.</li>
+            <li><strong>Security:</strong> Implementation of AES-256 encryption for data at rest and in transit, coupled with secure coding practices.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Future Roadmap Section -->
+      <section class="panel p-6 mb-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Our Future Roadmap</h2>
+        </div>
+        <div class="text-sm leading-relaxed space-y-4">
+          <p>
+            We are continuously working to enhance ShareKaro and introduce new features. Our roadmap includes:
+          </p>
+          <ul class="list-disc list-inside">
+            <li><strong>Enhanced Collaboration Features:</strong> Introducing shared workspaces and real-time document editing.</li>
+            <li><strong>Advanced File Management:</strong> Options for folder sharing, version control, and more granular access permissions.</li>
+            <li><strong>Mobile Applications:</strong> Dedicated iOS and Android apps for seamless on-the-go sharing.</li>
+            <li><strong>Increased Storage Options:</strong> Providing users with choices for longer storage durations and larger file size limits.</li>
+            <li><strong>API Access:</strong> Allowing developers to integrate ShareKaro's secure sharing capabilities into their own applications.</li>
+            <li><strong>Community-Driven Features:</strong> Actively listening to user feedback and implementing the most requested features.</li>
+          </ul>
+          <p>
+            Stay tuned for exciting updates as we continue to build the future of secure digital sharing!
           </p>
         </div>
       </section>
@@ -125,11 +191,19 @@
         <div class="header-accent pb-2 mb-4">
           <h2 class="text-lg font-mono font-medium">Meet the Team</h2>
         </div>
-        <div class="team-grid">
+        <div class="text-sm leading-relaxed space-y-4">
+          <p>
+            The ShareKaro team is a collective of passionate and skilled individuals dedicated to creating a secure and efficient sharing experience. Our diverse expertise spans backend architecture, intuitive frontend design, and robust deployment strategies, all united by a common goal: to deliver a platform that prioritizes your privacy and convenience.
+          </p>
+          <p>
+            While our individual contributions are detailed on the <a href="developers.html" class="text-blue-400 hover:underline">Developers page</a>, here we celebrate the collaborative spirit that drives ShareKaro forward. We are constantly learning, innovating, and working together to bring you the best possible service.
+          </p>
+        </div>
+        <div class="team-grid mt-6">
           <div class="team-card">
             <h3 class="team-title">🚀 Backend Team</h3>
             <p class="team-desc">
-              Our backend engineers built the secure file transfer protocol, encryption systems, and scalable infrastructure that powers Share Karo's core functionality.
+              Our backend engineers built the secure file transfer protocol, encryption systems, and scalable infrastructure that powers ShareKaro's core functionality.
             </p>
           </div>
           <div class="team-card">
@@ -149,9 +223,43 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
-      <p>Share Karo | Secure File Transfer Protocol</p>
-      <p class="mt-1">© 2025 Network Operations</p>
+    <footer class="mt-8 panel p-6 text-xs text-gray-400 font-mono">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">About Us</h3>
+          <ul class="space-y-2">
+            <li><a href="About_us.html" class="hover:text-blue-400">About Us</a></li>
+            <li><a href="developers.html" class="hover:text-blue-400">Join Our Team</a></li>
+            <li><a href="Help.html" class="hover:text-blue-400">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">Legal & Contact</h3>
+          <ul class="space-y-2">
+            <li><a href="legal_contact.html" class="hover:text-blue-400">Legal & Contact</a></li>
+            <li><a href="privacy_policy.html" class="hover:text-blue-400">Privacy Policy</a></li>
+            <li><a href="terms_conditions.html" class="hover:text-blue-400">Terms & Conditions</a></li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-right">
+          <p class="mt-4"><a href="https://github.com/sidmaharana/Share-Karo" class="hover:text-blue-400">Report a bug</a></p>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center text-gray-500">
+        <p>ShareKaro | Secure File Transfer Protocol</p>
+        <p class="mt-1">© 2025 Network Operations</p>
+      </div>
     </footer>
   </div>
 

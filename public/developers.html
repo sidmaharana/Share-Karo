@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share Karo - Developers</title>
+    <link rel="icon" type="image/png" href="Share-Karo_Logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background: #121212;
+        color: #e0e0e0;
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        overflow-x: hidden;
+      }
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .panel {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        z-index: 10;
+        position: relative;
+      }
+      .header-accent { border-bottom: 2px solid #3a7bd5; }
+      .developer-card {
+        background: #2d3748;
+        border: 1px solid #4a5568;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+      .developer-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        border: 3px solid #3a7bd5;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <canvas id="matrixCanvas" class="w-full h-full"></canvas>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+
+      <!-- Header -->
+      <header class="mb-8 panel p-4">
+        <div class="flex justify-between items-center">
+          <a href="index.html" class="flex items-center space-x-2">
+            <img src="Share-Karo_Logo.png" alt="ShareKaro Logo" class="h-8">
+            <span class="text-2xl font-mono font-medium text-blue-400">ShareKaro</span>
+          </a>
+          <nav>
+            <ul class="flex flex-col space-y-2 md:flex-row md:space-x-6 md:space-y-0 text-sm">
+              <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+              
+              <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
+              <li><a href="developers.html" class="hover:text-blue-400">Developers</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Developers Section -->
+      <section class="panel p-6 mt-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Our Team</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Sidharth Maharana -->
+          <div class="developer-card">
+            <img src="https://avatars.githubusercontent.com/sidmaharana" alt="Sidharth Maharana" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-blue-500">
+            <h3 class="text-xl font-mono font-medium mb-2">Sidharth Maharana</h3>
+            <p class="text-gray-400 text-sm">Backend Developer & Cloud Connections</p>
+            <p class="text-gray-500 text-xs mt-2">GitHub: <a href="https://github.com/sidmaharana" class="text-blue-400 hover:underline" target="_blank">sidmaharana</a></p>
+            <p class="text-gray-500 text-xs">LinkedIn: <a href="https://www.linkedin.com/in/sidmaharana" class="text-blue-400 hover:underline" target="_blank">sidmaharana</a></p>
+          </div>
+          <!-- Saee Tarde -->
+          <div class="developer-card">
+            <img src="https://avatars.githubusercontent.com/SaeeTarde" alt="Saee Tarde" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-blue-500">
+            <h3 class="text-xl font-mono font-medium mb-2">Saee Tarde</h3>
+            <p class="text-gray-400 text-sm">Frontend Developer</p>
+            <p class="text-gray-500 text-xs mt-2">GitHub: <a href="https://github.com/SaeeTarde" class="text-blue-400 hover:underline" target="_blank">SaeeTarde</a></p>
+            <p class="text-gray-500 text-xs">LinkedIn: <a href="https://www.linkedin.com/in/saee-tarde/" class="text-blue-400 hover:underline" target="_blank">saee-tarde</a></p>
+          </div>
+          <!-- Parv Sheth -->
+          <div class="developer-card">
+            <img src="https://avatars.githubusercontent.com/normieparv00" alt="Parv Sheth" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-blue-500">
+            <h3 class="text-xl font-mono font-medium mb-2">Parv Sheth</h3>
+            <p class="text-gray-400 text-sm">Deployment & Operations</p>
+            <p class="text-gray-500 text-xs mt-2">GitHub: <a href="https://github.com/normieparv00" class="text-blue-400 hover:underline" target="_blank">normieparv00</a></p>
+            <p class="text-gray-500 text-xs">LinkedIn: <a href="https://www.linkedin.com/in/parv-sheth-35627027a/" class="text-blue-400 hover:underline" target="_blank">parv-sheth</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+    <footer class="mt-8 panel p-6 text-xs text-gray-400 font-mono">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+            
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">About Us</h3>
+          <ul class="space-y-2">
+            <li><a href="About_us.html" class="hover:text-blue-400">About Us</a></li>
+            <li><a href="developers.html" class="hover:text-blue-400">Join Our Team</a></li>
+            <li><a href="Help.html" class="hover:text-blue-400">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-white mb-3">Legal & Contact</h3>
+          <ul class="space-y-2">
+            <li><a href="legal_contact.html" class="hover:text-blue-400">Legal & Contact</a></li>
+            <li><a href="privacy_policy.html" class="hover:text-blue-400">Privacy Policy</a></li>
+            <li><a href="terms_conditions.html" class="hover:text-blue-400">Terms & Conditions</a></li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-right">
+          <p class="mt-4"><a href="https://github.com/sidmaharana/Share-Karo" class="hover:text-blue-400">Report a bug</a></p>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center text-gray-500">
+        <p>ShareKaro | Secure File Transfer Protocol</p>
+        <p class="mt-1">2025 Network Operations</p>
+      </div>
+    </footer>
+    </div>
+
+    <!-- Matrix Animation -->
+    <script>
+      const canvas = document.getElementById('matrixCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const letters = '01';
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      const drops = Array.from({ length: columns }).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(18, 18, 18, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#3a7bd5';
+        ctx.font = fontSize + 'px IBM Plex Mono';
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters[Math.floor(Math.random() * letters.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
+        }
+      }
+      setInterval(draw, 35);
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>

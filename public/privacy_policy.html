@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Engineering Blog | Share Karo</title>
+  <title>Privacy Policy | Share Karo</title>
   <link rel="icon" type="image/png" href="Share-Karo_Logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     body {
       background: #121212;
@@ -31,12 +32,36 @@
     .header-accent {
       border-bottom: 2px solid #3a7bd5;
     }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .team-card {
+      background: #2d3748;
+      border-left: 3px solid #3a7bd5;
+      padding: 20px;
+      transition: all 0.2s;
+      border-radius: 4px;
+    }
+    .team-card:hover {
+      background: #4a5568;
+      transform: translateY(-2px);
+    }
+    .team-title {
+      color: #3a7bd5;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .team-desc {
+      color: #a0aec0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
     .status-indicator {
-      height: 10px;
       width: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 6px;
+      height: 10px;
+      border-radius: 9999px;
       background-color: #10b981;
       animation: pulse 2s infinite;
     }
@@ -44,110 +69,81 @@
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(1.5); }
     }
-    .blog-card {
-      background: #2d3748;
-      border-left: 3px solid #3a7bd5;
-      padding: 20px;
-      margin-bottom: 20px;
-      transition: all 0.2s;
-    }
-    .blog-card:hover {
-      background: #4a5568;
-      transform: translateY(-2px);
-    }
-    .blog-title {
-      color: #3a7bd5;
-      font-weight: 500;
-      margin-bottom: 12px;
-      font-size: 18px;
-    }
-    .blog-date {
-      color: #718096;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-    .blog-excerpt {
-      color: #a0aec0;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .btn-primary {
-      background: #3a7bd5;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: all 0.2s;
-    }
-    .btn-primary:hover {
-      background: #2c5fb3;
-    }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body class="min-h-screen">
   <canvas id="matrixCanvas" class="w-full h-full"></canvas>
 
-  <div class="container mx-auto px-4 py-8 max-w-4xl relative z-10">
+  <div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
     <!-- Header -->
     <header class="mb-8 panel p-4">
       <div class="flex justify-between items-center">
         <a href="index.html" class="flex items-center space-x-2">
-          <img src="Share-Karo_Logo.png" alt="ShareKaro Logo" class="h-8">
-          <span class="text-2xl font-mono font-medium text-blue-400">ShareKaro</span>
-        </a>
+            <img src="Share-Karo_Logo.png" alt="ShareKaro Logo" class="h-8">
+            <span class="text-2xl font-mono font-medium text-blue-400">ShareKaro</span>
+          </a>
         <nav>
           <ul class="flex flex-col space-y-2 md:flex-row md:space-x-6 md:space-y-0 text-sm">
             <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
-            
-            <li><a href="Help.html" class="hover:text-blue-400">Help</a></li>
-            <li><a href="developers.html" class="hover:text-blue-400">Developers</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Privacy Policy Section -->
     <main>
       <section class="panel p-6 mb-6">
         <div class="header-accent pb-2 mb-4">
-          <h2 class="text-lg font-mono font-medium">Engineering Blog</h2>
+          <h2 class="text-lg font-mono font-medium">Privacy Policy</h2>
         </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-06-18 | TECHNOLOGY</div>
-          <h3 class="blog-title">The Architecture Behind Share Karo</h3>
-          <p class="blog-excerpt">
-            A deep dive into the distributed systems architecture that powers our file sharing platform, including our use of edge computing to reduce latency and improve transfer speeds globally.
+        <div class="text-sm leading-relaxed space-y-4">
+          <p>
+            At ShareKaro, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose information about you when you use our service.
           </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
-        </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-05-22 | SECURITY</div>
-          <h3 class="blog-title">Implementing End-to-End Encryption</h3>
-          <p class="blog-excerpt">
-            How we designed our encryption system to ensure files are encrypted before they leave your device and can only be decrypted by the intended recipient, with no backdoors.
+
+          <h3 class="font-semibold mt-6 mb-2">1. Information We Collect</h3>
+          <p>
+            We collect minimal information necessary to provide our services. This includes:
           </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
-        </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-04-15 | UX DESIGN</div>
-          <h3 class="blog-title">Minimalist Interface for Maximum Usability</h3>
-          <p class="blog-excerpt">
-            Exploring the design philosophy behind our terminal-inspired interface and how we balance simplicity with powerful functionality for both novice and power users.
+          <ul class="list-disc list-inside ml-4">
+            <li><strong>Files and Text:</strong> When you upload files or share text, this content is temporarily stored on our servers. We implement a zero-knowledge architecture, meaning your data is encrypted on your device before it reaches us, and we do not have the means to decrypt it.</li>
+            <li><strong>Usage Data:</strong> We may collect non-identifiable information about how you interact with our service, such as access times and features used, to improve our service.</li>
+          </ul>
+
+          <h3 class="font-semibold mt-6 mb-2">2. How We Use Information</h3>
+          <p>
+            We use the information we collect solely to provide and improve the ShareKaro service:
           </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
-        </div>
-        
-        <div class="blog-card">
-          <div class="blog-date">2025-03-08 | PERFORMANCE</div>
-          <h3 class="blog-title">Optimizing Large File Transfers</h3>
-          <p class="blog-excerpt">
-            The techniques we use to handle large file transfers efficiently, including chunked uploads, parallel processing, and adaptive compression algorithms.
+          <ul class="list-disc list-inside ml-4">
+            <li>To facilitate secure file and text transfers.</li>
+            <li>To monitor and analyze usage patterns to enhance user experience and service functionality.</li>
+            <li>To maintain the security and integrity of our service.</li>
+          </ul>
+
+          <h3 class="font-semibold mt-6 mb-2">3. Data Retention</h3>
+          <p>
+            For your privacy and to manage storage efficiently, all uploaded files are automatically deleted from our servers after 3 minutes from the time of upload. Shared text snippets are stored for 10 minutes. We do not retain any user content beyond these specified durations.
           </p>
-          <a href="#" class="btn-primary inline-block mt-3">READ MORE</a>
+
+          <h3 class="font-semibold mt-6 mb-2">4. Data Security</h3>
+          <p>
+            We employ industry-leading security measures, including AES-256 end-to-end encryption, to protect your data. Your files and text are encrypted on your device before transmission and can only be decrypted by the intended recipient. We do not have access to your unencrypted content.
+          </p>
+
+          <h3 class="font-semibold mt-6 mb-2">5. Third-Party Disclosure</h3>
+          <p>
+            We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties. We may share non-identifiable, aggregated usage data with trusted third parties for analytics purposes, provided those parties agree to keep this information confidential.
+          </p>
+
+          <h3 class="font-semibold mt-6 mb-2">6. Changes to This Privacy Policy</h3>
+          <p>
+            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.
+          </p>
+
+          <h3 class="font-semibold mt-6 mb-2">7. Contact Us</h3>
+          <p>
+            If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@sharekaro.com" class="text-blue-400 hover:underline">privacy@sharekaro.com</a>.
+          </p>
         </div>
       </section>
     </main>
@@ -159,7 +155,6 @@
           <h3 class="text-sm font-medium text-white mb-3">Quick Links</h3>
           <ul class="space-y-2">
             <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
-            
           </ul>
         </div>
         <div>
@@ -173,10 +168,8 @@
         <div>
           <h3 class="text-sm font-medium text-white mb-3">Legal & Contact</h3>
           <ul class="space-y-2">
-            <li><a href="legal_contact.html" class="hover:text-blue-400">Legal & Contact</a></li>
             <li><a href="privacy_policy.html" class="hover:text-blue-400">Privacy Policy</a></li>
             <li><a href="terms_conditions.html" class="hover:text-blue-400">Terms & Conditions</a></li>
-            
           </ul>
         </div>
       </div>
@@ -188,13 +181,13 @@
       </div>
 
       <div class="mt-6 text-center text-gray-500">
-        <p>Share Karo | Secure File Transfer Protocol</p>
+        <p>ShareKaro | Secure File Transfer Protocol</p>
         <p class="mt-1">© 2025 Network Operations</p>
       </div>
     </footer>
   </div>
 
-  <!-- Matrix Animation -->
+  <!-- Matrix Animation Background -->
   <script>
     const canvas = document.getElementById('matrixCanvas');
     const ctx = canvas.getContext('2d');
