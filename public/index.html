@@ -159,10 +159,21 @@
         </div>
         <textarea id="textInput" rows="4" placeholder="Enter your text here..." class="mb-4"></textarea>
         <button id="shareTextBtn" class="btn-primary w-full font-mono py-2 rounded text-sm mb-4">GENERATE CODE</button>
-        <p id="textCodeDisplay" class="text-sm font-mono mb-4"></p>
+      </section>
 
-        <hr class="my-4 border-gray-600" />
+      <!-- Text Codes -->
+      <section id="textCodesContainer" class="panel p-6 mt-4 hidden">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Text Access Codes</h2>
+        </div>
+        <div id="textCodesList" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+      </section>
 
+      <!-- Retrieve Text Section -->
+      <section class="panel p-6 mt-6">
+        <div class="header-accent pb-2 mb-4">
+          <h2 class="text-lg font-mono font-medium">Retrieve Text</h2>
+        </div>
         <input type="text" id="textCodeInput" placeholder="Enter code to retrieve text" class="mb-4" />
         <button id="retrieveTextBtn" class="btn-secondary w-full font-mono py-2 rounded text-sm mb-4">RETRIEVE TEXT</button>
         <pre id="retrievedText" class="whitespace-pre-wrap text-sm font-mono text-green-300 mt-2"></pre>
@@ -307,6 +318,13 @@
         window.location.href = `/download/${code}`;
       });
 
+      document.getElementById("fileCodeInput").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("downloadBtn").click();
+        }
+      });
+
       function copyToClipboard(code) {
         navigator.clipboard.writeText(code);
         alert(`Code ${code} copied to clipboard`);
@@ -316,16 +334,31 @@
       document.getElementById("shareTextBtn").addEventListener("click", async () => {
         const text = document.getElementById("textInput").value.trim();
         if (!text) return alert("Please enter some text");
-        const res = await fetch("/share-text", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text })
-        });
-        const data = await res.json();
-        if (res.ok) {
-          document.getElementById("textCodeDisplay").textContent = `Access Code: ${data.code}`;
-        } else {
-          alert(data.error || "Failed to share text");
+        const textCodesList = document.getElementById("textCodesList");
+        const textCodesContainer = document.getElementById("textCodesContainer");
+
+        textCodesList.innerHTML = ""; // Clear previous codes
+
+        try {
+          const res = await fetch("/share-text", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text })
+          });
+          const data = await res.json();
+          if (res.ok) {
+            const codeDiv = document.createElement("div");
+            codeDiv.textContent = data.code;
+            codeDiv.classList.add("code-display");
+            codeDiv.onclick = () => copyToClipboard(data.code);
+            textCodesList.appendChild(codeDiv);
+            textCodesContainer.classList.remove("hidden");
+          } else {
+            alert(data.error || "Failed to share text");
+          }
+        } catch (error) {
+          alert("Network error or server not reachable. Please try again later.");
+          console.error("Error sharing text:", error);
         }
       });
 

@@ -122,7 +122,12 @@ app.post("/share-text", async (req, res) => {
     const { text } = req.body;
     if (!text) return res.status(400).json({ error: "No text provided" });
 
-    const code = uuidv4().slice(0, 6); // Short unique code
+    let code = uuidv4().slice(0, 6); // Short unique code
+    // Ensure code is always 6 characters long
+    if (code.length !== 6) {
+        console.warn("Generated UUID code was not 6 characters. Falling back to random number.");
+        code = Math.floor(100000 + Math.random() * 900000).toString();
+    }
 
     try {
         await conn.db.collection("texts").insertOne({
@@ -137,8 +142,11 @@ app.post("/share-text", async (req, res) => {
             { expireAfterSeconds: 600 }
         );
 
+        console.log(`Generated text code: ${code}`); // Log the generated code
+
         res.json({ code });
     } catch (err) {
+        console.error("Error sharing text:", err); // Log server-side errors
         res.status(500).json({ error: err.message });
     }
 });
