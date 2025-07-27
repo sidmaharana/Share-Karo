@@ -9,8 +9,6 @@ document.getElementById("fileInput").addEventListener("change", async function (
   const fileCodesList = document.getElementById("fileCodesList");
   const directDownloadLinks = document.getElementById("directDownloadLinks");
   const progressBar = document.getElementById("progress");
-  const uploadedFilesContainer = document.getElementById("uploadedFilesContainer");
-  const fileCodesContainer = document.getElementById("fileCodesContainer");
 
   if (!files.length) return;
 
