@@ -45,7 +45,7 @@ document.getElementById("fileInput").addEventListener("change", async function (
 
         // Display direct download link
         const linkDiv = document.createElement("div");
-        linkDiv.innerHTML = `<a href="${result.directDownloadLink}" target="_blank" class="text-blue-400 hover:underline">${result.directDownloadLink}</a>`;
+        linkDiv.innerHTML = `<a href="${window.location.origin}${result.directDownloadLink}" target="_blank" class="text-blue-400 hover:underline">${window.location.origin}${result.directDownloadLink}</a>`;
         directDownloadLinks.appendChild(linkDiv);
 
       } else {
