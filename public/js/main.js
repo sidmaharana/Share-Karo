@@ -28,49 +28,86 @@ document.getElementById("fileInput").addEventListener("change", async function (
     if (progress >= 100) clearInterval(interval);
   }, 300);
 
-  for (let file of files) {
-    const formData = new FormData();
-    formData.append("file", file);
-    try {
-      const response = await fetch("/upload", { method: "POST", body: formData });
-      const result = await response.json();
-      const item = document.createElement("li");
-      if (response.ok) {
-        item.innerHTML = `✓ ${file.name} <span class="text-gray-500 text-xs">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>`;
-        const codeDiv = document.createElement("div");
-        codeDiv.textContent = result.fileCode;
-        codeDiv.classList.add("code-display");
-        codeDiv.onclick = () => copyToClipboard(result.fileCode);
-        fileCodesList.appendChild(codeDiv);
-
-        // Display direct download link
-        const linkDiv = document.createElement("div");
-        linkDiv.innerHTML = `<a href="${window.location.origin}${result.directDownloadLink}" target="_blank" class="text-blue-400 hover:underline">${window.location.origin}${result.directDownloadLink}</a>`;
-        downloadLinksList.appendChild(linkDiv);
-
-        // Generate and display QR code
-        qrCodeContainer.innerHTML = ''; // Clear previous QR code
-        new QRCode(qrCodeContainer, {
-          text: `${window.location.origin}${result.directDownloadLink}`,
-          width: 128,
-          height: 128,
-          colorDark : "#000000",
-          colorLight : "#ffffff",
-          correctLevel : QRCode.CorrectLevel.H
-        });
-
-      } else {
-        item.innerHTML = `✗ ${file.name} - ${result.error}`;
-      }
-      uploadedFilesList.appendChild(item);
-    } catch {
-      const item = document.createElement("li");
-      item.innerHTML = `✗ ${file.name} - Upload failed`;
-      uploadedFilesList.appendChild(item);
-    }
+  const formData = new FormData();
+  for (let i = 0; i < files.length; i++) {
+    formData.append("file", files[i]);
   }
+
+  try {
+    const response = await fetch("/upload", { method: "POST", body: formData });
+    const result = await response.json();
+    const item = document.createElement("li");
+    if (response.ok) {
+      if (files.length === 1) {
+        item.innerHTML = `✓ ${files[0].name} uploaded!`;
+      } else {
+        item.innerHTML = `✓ Files zipped and uploaded!`;
+      }
+      const codeDiv = document.createElement("div");
+      codeDiv.textContent = result.fileCode;
+      codeDiv.classList.add("code-display");
+      codeDiv.onclick = () => copyToClipboard(result.fileCode);
+      fileCodesList.appendChild(codeDiv);
+
+      // Display direct download link
+      const linkDiv = document.createElement("div");
+      linkDiv.innerHTML = `<a href="${window.location.origin}${result.directDownloadLink}" target="_blank" class="text-blue-400 hover:underline">${window.location.origin}${result.directDownloadLink}</a>`;
+      downloadLinksList.appendChild(linkDiv);
+
+      // Generate and display QR code
+      qrCodeContainer.innerHTML = ''; // Clear previous QR code
+      new QRCode(qrCodeContainer, {
+        text: `${window.location.origin}${result.directDownloadLink}`,
+        width: 128,
+        height: 128,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+
+      startTimer(300); // Start 5-minute timer (300 seconds)
+
+    } else {
+      item.innerHTML = `✗ Upload failed - ${result.error}`;
+    }
+    uploadedFilesList.appendChild(item);
+  } catch (error) {
+    const item = document.createElement("li");
+    item.innerHTML = `✗ Upload failed: ${error.message}`;
+    uploadedFilesList.appendChild(item);
+  }
+
   statusText.innerText = "Status: Upload complete";
 });
+
+let timerInterval;
+
+function startTimer(duration) {
+  let timer = duration;
+  let minutes, seconds;
+  const timerDisplay = document.getElementById("timerDisplay");
+
+  clearInterval(timerInterval); // Clear any existing timer
+
+  timerDisplay.classList.remove("hidden");
+  timerDisplay.classList.add("blinking-timer");
+
+  timerInterval = setInterval(() => {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    timerDisplay.textContent = `Expires in: ${minutes}:${seconds}`;
+
+    if (--timer < 0) {
+      clearInterval(timerInterval);
+      timerDisplay.textContent = "Expired!";
+      timerDisplay.classList.remove("blinking-timer");
+    }
+  }, 1000);
+}
 
 document.getElementById("downloadBtn").addEventListener("click", () => {
   const code = document.getElementById("fileCodeInput").value.trim();

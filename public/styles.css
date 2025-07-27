@@ -210,3 +210,13 @@ footer {
 .hidden {
   display: none;
 }
+
+@keyframes blink {
+  0% { color: red; }
+  50% { color: white; }
+  100% { color: red; }
+}
+
+.blinking-timer {
+  animation: blink 1s linear infinite;
+}

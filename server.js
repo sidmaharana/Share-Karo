@@ -46,7 +46,7 @@ conn.once("open", async () => {
 
     await conn.db.collection("uploads.files").createIndex(
         { "metadata.uploadDate": 1 },
-        { expireAfterSeconds: 180 } // auto-delete in 3 mins
+        { expireAfterSeconds: 300 } // auto-delete in 5 mins
     );
     console.log("⏳ TTL Index Set: Files auto-delete after 3 minutes");
 });
@@ -57,43 +57,111 @@ app.get("/", (req, res) => {
 });
 
 // 📁 File Upload Route
-app.post("/upload", (req, res) => {
-    if (!req.files || !req.files.file) {
-        return res.status(400).json({ error: "No file uploaded" });
+const archiver = require("archiver");
+
+app.post("/upload", async (req, res) => {
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).json({ error: "No files uploaded" });
     }
 
-    const file = req.files.file;
+    const files = Array.isArray(req.files.file) ? req.files.file : [req.files.file];
+
+    if (files.length === 0) {
+        return res.status(400).json({ error: "No files selected for upload" });
+    }
+
     const fileCode = Math.floor(100000 + Math.random() * 900000).toString();
-    const fileName = `${fileCode}-${file.name}`;
 
-    const uploadStream = gridFSBucket.openUploadStream(fileName, {
-        metadata: { uploadDate: new Date() },
-    });
+    if (files.length === 1) {
+        // Handle single file upload
+        const file = files[0];
+        const fileName = `${fileCode}-${file.name}`;
 
-    uploadStream.end(file.data);
+        const uploadStream = gridFSBucket.openUploadStream(fileName, {
+            metadata: { uploadDate: new Date(), originalName: file.name },
+            contentType: file.mimetype
+        });
 
-    uploadStream.on("finish", () => {
-        const directDownloadLink = `/direct-download/${fileCode}`;
-        res.json({ fileCode, directDownloadLink });
-    });
+        uploadStream.end(file.data);
 
-    uploadStream.on("error", (err) => {
-        res.status(500).json({ error: err.message });
-    });
+        uploadStream.on("finish", () => {
+            const directDownloadLink = `/direct-download/${fileCode}`;
+            res.json({ fileCode, directDownloadLink });
+        });
+
+        uploadStream.on("error", (err) => {
+            console.error("Error uploading single file to GridFS:", err);
+            res.status(500).json({ error: err.message });
+        });
+
+    } else {
+        // Handle multiple file upload (zip)
+        const zipFileName = `${fileCode}-ShareKaro_Files.zip`;
+
+        const archive = archiver('zip', {
+            zlib: { level: 9 } // Sets the compression level.
+        });
+
+        const uploadStream = gridFSBucket.openUploadStream(zipFileName, {
+            metadata: { uploadDate: new Date(), originalNames: files.map(f => f.name) },
+            contentType: 'application/zip'
+        });
+
+        archive.pipe(uploadStream);
+
+        for (const file of files) {
+            archive.append(file.data, { name: file.name });
+        }
+
+        archive.finalize();
+
+        uploadStream.on("finish", () => {
+            const directDownloadLink = `/direct-download/${fileCode}`;
+            res.json({ fileCode, directDownloadLink });
+        });
+
+        uploadStream.on("error", (err) => {
+            console.error("Error uploading zip to GridFS:", err);
+            res.status(500).json({ error: err.message });
+        });
+
+        archive.on('warning', function(err) {
+            if (err.code === 'ENOENT') {
+                console.warn("Archiver warning:", err);
+            } else {
+                console.error("Archiver error:", err);
+                res.status(500).json({ error: err.message });
+            }
+        });
+
+        archive.on('error', function(err) {
+            console.error("Archiver error:", err);
+            res.status(500).json({ error: err.message });
+        });
+    }
 });
 
 // 📥 Download File by Code (for manual retrieval)
 app.get("/download/:code", async (req, res) => {
     const fileCode = req.params.code;
     try {
-        const files = await conn.db.collection("uploads.files").find({ filename: new RegExp(`^${fileCode}-`) }).toArray();
-        if (!files.length) return res.status(404).json({ error: "File not found" });
+        const file = await conn.db.collection("uploads.files").findOne({ filename: new RegExp(`^${fileCode}-`) });
+        if (!file) return res.status(404).json({ error: "File not found" });
 
-        const file = files[0];
-        const originalFileName = file.filename.replace(/^\d{6}-/, '');
+        let downloadFileName;
+        let contentType;
 
-        res.set("Content-Disposition", `attachment; filename="${originalFileName}"`);
-        res.set("Content-Type", file.contentType || "application/octet-stream");
+        if (file.contentType === 'application/zip') {
+            downloadFileName = file.filename;
+            contentType = 'application/zip';
+        } else {
+            // For single files, remove the fileCode prefix from the filename
+            downloadFileName = file.filename.replace(/^\d{6}-/, '');
+            contentType = file.contentType || "application/octet-stream";
+        }
+
+        res.set("Content-Disposition", `attachment; filename="${downloadFileName}"`);
+        res.set("Content-Type", contentType);
         gridFSBucket.openDownloadStream(file._id).pipe(res);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -104,14 +172,23 @@ app.get("/download/:code", async (req, res) => {
 app.get("/direct-download/:code", async (req, res) => {
     const fileCode = req.params.code;
     try {
-        const files = await conn.db.collection("uploads.files").find({ filename: new RegExp(`^${fileCode}-`) }).toArray();
-        if (!files.length) return res.status(404).json({ error: "File not found" });
+        const file = await conn.db.collection("uploads.files").findOne({ filename: new RegExp(`^${fileCode}-`) });
+        if (!file) return res.status(404).json({ error: "File not found" });
 
-        const file = files[0];
-        const originalFileName = file.filename.replace(/^\d{6}-/, '');
+        let downloadFileName;
+        let contentType;
 
-        res.set("Content-Disposition", `attachment; filename="${originalFileName}"`);
-        res.set("Content-Type", file.contentType || "application/octet-stream");
+        if (file.contentType === 'application/zip') {
+            downloadFileName = file.filename;
+            contentType = 'application/zip';
+        } else {
+            // For single files, remove the fileCode prefix from the filename
+            downloadFileName = file.filename.replace(/^\d{6}-/, '');
+            contentType = file.contentType || "application/octet-stream";
+        }
+
+        res.set("Content-Disposition", `attachment; filename="${downloadFileName}"`);
+        res.set("Content-Type", contentType);
         gridFSBucket.openDownloadStream(file._id).pipe(res);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -158,7 +235,7 @@ app.post("/share-text", async (req, res) => {
         // Optional: Auto-expire after 10 mins
         await conn.db.collection("texts").createIndex(
             { createdAt: 1 },
-            { expireAfterSeconds: 600 }
+            { expireAfterSeconds: 300 }
         );
 
         console.log(`Generated text code: ${code}`); // Log the generated code
