@@ -146,7 +146,7 @@
 
       <!-- Access Codes -->
       <section id="fileCodesContainer" class="panel p-6 mt-4 hidden">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <div class="header-accent pb-2 mb-4">
               <h2 class="text-lg font-mono font-medium">Access Codes</h2>
@@ -158,8 +158,14 @@
               <h2 class="text-lg font-mono font-medium">Download Links</h2>
             </div>
             <div id="downloadLinksList" class="grid grid-cols-1 gap-3"></div>
-            
           </div>
+          <div>
+            <div class="header-accent pb-2 mb-4">
+              <h2 class="text-lg font-mono font-medium">QR Code</h2>
+            </div>
+            <div id="qrCodeContainer" class="flex justify-center items-center p-4 bg-white rounded"></div>
+          </div>
+        </div>
         </div>
       </section>
 
@@ -267,6 +273,7 @@
     </script>
 
     <!-- Upload/Download Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

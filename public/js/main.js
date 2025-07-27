@@ -8,6 +8,7 @@ document.getElementById("fileInput").addEventListener("change", async function (
   const uploadedFilesList = document.getElementById("uploadedFilesList");
   const fileCodesList = document.getElementById("fileCodesList");
   const downloadLinksList = document.getElementById("downloadLinksList");
+  const qrCodeContainer = document.getElementById("qrCodeContainer");
   const progressBar = document.getElementById("progress");
 
   if (!files.length) return;
@@ -16,6 +17,7 @@ document.getElementById("fileInput").addEventListener("change", async function (
   uploadedFilesList.innerHTML = "";
   fileCodesList.innerHTML = "";
   downloadLinksList.innerHTML = ""; // Clear previous links
+  qrCodeContainer.innerHTML = ""; // Clear previous QR codes
   uploadedFilesContainer.classList.remove("hidden");
   fileCodesContainer.classList.remove("hidden");
 
@@ -45,6 +47,17 @@ document.getElementById("fileInput").addEventListener("change", async function (
         const linkDiv = document.createElement("div");
         linkDiv.innerHTML = `<a href="${window.location.origin}${result.directDownloadLink}" target="_blank" class="text-blue-400 hover:underline">${window.location.origin}${result.directDownloadLink}</a>`;
         downloadLinksList.appendChild(linkDiv);
+
+        // Generate and display QR code
+        qrCodeContainer.innerHTML = ''; // Clear previous QR code
+        new QRCode(qrCodeContainer, {
+          text: `${window.location.origin}${result.directDownloadLink}`,
+          width: 128,
+          height: 128,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
 
       } else {
         item.innerHTML = `✗ ${file.name} - ${result.error}`;
