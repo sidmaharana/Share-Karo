@@ -146,11 +146,21 @@
 
       <!-- Access Codes -->
       <section id="fileCodesContainer" class="panel p-6 mt-4 hidden">
-        <div class="header-accent pb-2 mb-4">
-          <h2 class="text-lg font-mono font-medium">Access Codes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div class="header-accent pb-2 mb-4">
+              <h2 class="text-lg font-mono font-medium">Access Codes</h2>
+            </div>
+            <div id="fileCodesList" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+          </div>
+          <div>
+            <div class="header-accent pb-2 mb-4">
+              <h2 class="text-lg font-mono font-medium">Download Links</h2>
+            </div>
+            <div id="downloadLinksList" class="grid grid-cols-1 gap-3"></div>
+            
+          </div>
         </div>
-        <div id="fileCodesList" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
-        <div id="directDownloadLinks" class="mt-4 space-y-2 text-sm font-mono"></div>
       </section>
 
       <!-- Text Sharing Section -->

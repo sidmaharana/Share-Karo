@@ -7,7 +7,7 @@ document.getElementById("fileInput").addEventListener("change", async function (
   const statusText = document.getElementById("uploadStatus");
   const uploadedFilesList = document.getElementById("uploadedFilesList");
   const fileCodesList = document.getElementById("fileCodesList");
-  const directDownloadLinks = document.getElementById("directDownloadLinks");
+  const downloadLinksList = document.getElementById("downloadLinksList");
   const progressBar = document.getElementById("progress");
 
   if (!files.length) return;
@@ -15,7 +15,7 @@ document.getElementById("fileInput").addEventListener("change", async function (
   statusText.innerText = "Status: Uploading...";
   uploadedFilesList.innerHTML = "";
   fileCodesList.innerHTML = "";
-  directDownloadLinks.innerHTML = ""; // Clear previous links
+  downloadLinksList.innerHTML = ""; // Clear previous links
   uploadedFilesContainer.classList.remove("hidden");
   fileCodesContainer.classList.remove("hidden");
 
@@ -44,7 +44,7 @@ document.getElementById("fileInput").addEventListener("change", async function (
         // Display direct download link
         const linkDiv = document.createElement("div");
         linkDiv.innerHTML = `<a href="${window.location.origin}${result.directDownloadLink}" target="_blank" class="text-blue-400 hover:underline">${window.location.origin}${result.directDownloadLink}</a>`;
-        directDownloadLinks.appendChild(linkDiv);
+        downloadLinksList.appendChild(linkDiv);
 
       } else {
         item.innerHTML = `✗ ${file.name} - ${result.error}`;
