@@ -2,6 +2,16 @@ document.getElementById("selectFilesBtn").addEventListener("click", () =>
   document.getElementById("fileInput").click()
 );
 
+const downloadLimitToggle = document.getElementById("downloadLimitToggle");
+const downloadLimitInput = document.getElementById("downloadLimitInput");
+
+downloadLimitToggle.addEventListener("change", () => {
+  downloadLimitInput.disabled = !downloadLimitToggle.checked;
+  if (downloadLimitToggle.checked) {
+    downloadLimitInput.focus();
+  }
+});
+
 document.getElementById("fileInput").addEventListener("change", async function () {
   const files = this.files;
   const statusText = document.getElementById("uploadStatus");
@@ -31,6 +41,16 @@ document.getElementById("fileInput").addEventListener("change", async function (
   const formData = new FormData();
   for (let i = 0; i < files.length; i++) {
     formData.append("file", files[i]);
+  }
+
+  if (downloadLimitToggle.checked) {
+    const limit = parseInt(downloadLimitInput.value, 10);
+    if (isNaN(limit) || limit < 1) {
+      alert("Please enter a valid download limit (a number greater than 0).");
+      statusText.innerText = "Status: Ready";
+      return;
+    }
+    formData.append("downloadLimit", limit);
   }
 
   try {
@@ -67,7 +87,7 @@ document.getElementById("fileInput").addEventListener("change", async function (
 
       startTimer(300); // Start 5-minute timer (300 seconds)
 
-    } else {
+      } else {
       item.innerHTML = `✗ Upload failed - ${result.error}`;
     }
     uploadedFilesList.appendChild(item);

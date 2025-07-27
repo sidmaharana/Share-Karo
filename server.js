@@ -44,11 +44,20 @@ conn.once("open", async () => {
     gridFSBucket = new GridFSBucket(conn.db, { bucketName: "uploads" });
     console.log("📦 GridFS Initialized");
 
+    // Drop existing index if it conflicts, then create new one
+    try {
+        await conn.db.collection("uploads.files").dropIndex("metadata.uploadDate_1");
+        console.log("🗑️ Dropped old 'uploads.files' TTL index.");
+    } catch (e) {
+        if (e.codeName !== 'IndexNotFound') {
+            console.warn("⚠️ Could not drop 'uploads.files' TTL index (might not exist or other error):", e.message);
+        }
+    }
     await conn.db.collection("uploads.files").createIndex(
         { "metadata.uploadDate": 1 },
         { expireAfterSeconds: 300 } // auto-delete in 5 mins
     );
-    console.log("⏳ TTL Index Set: Files auto-delete after 3 minutes");
+    console.log("⏳ TTL Index Set for 'uploads.files': Files auto-delete after 5 minutes");
 });
 
 // Serve index.html
@@ -65,6 +74,7 @@ app.post("/upload", async (req, res) => {
     }
 
     const files = Array.isArray(req.files.file) ? req.files.file : [req.files.file];
+    const downloadLimit = req.body.downloadLimit ? parseInt(req.body.downloadLimit) : null;
 
     if (files.length === 0) {
         return res.status(400).json({ error: "No files selected for upload" });
@@ -78,7 +88,7 @@ app.post("/upload", async (req, res) => {
         const fileName = `${fileCode}-${file.name}`;
 
         const uploadStream = gridFSBucket.openUploadStream(fileName, {
-            metadata: { uploadDate: new Date(), originalName: file.name },
+            metadata: { uploadDate: new Date(), originalName: file.name, downloadLimit: downloadLimit, currentDownloads: 0 },
             contentType: file.mimetype
         });
 
@@ -103,7 +113,7 @@ app.post("/upload", async (req, res) => {
         });
 
         const uploadStream = gridFSBucket.openUploadStream(zipFileName, {
-            metadata: { uploadDate: new Date(), originalNames: files.map(f => f.name) },
+            metadata: { uploadDate: new Date(), originalNames: files.map(f => f.name), downloadLimit: downloadLimit, currentDownloads: 0 },
             contentType: 'application/zip'
         });
 
@@ -146,7 +156,25 @@ app.get("/download/:code", async (req, res) => {
     const fileCode = req.params.code;
     try {
         const file = await conn.db.collection("uploads.files").findOne({ filename: new RegExp(`^${fileCode}-`) });
-        if (!file) return res.status(404).json({ error: "File not found" });
+        if (!file) return res.status(404).json({ error: "File not found or expired" });
+
+        let downloadLimit = file.metadata.downloadLimit;
+        let currentDownloads = file.metadata.currentDownloads;
+
+        if (downloadLimit !== null && currentDownloads >= downloadLimit) {
+            // Optionally delete the file after the limit is reached
+            await gridFSBucket.delete(new ObjectId(file._id));
+            await conn.db.collection("uploads.chunks").deleteMany({ files_id: file._id });
+            return res.status(403).json({ error: "Download limit reached for this file." });
+        }
+
+        // Increment download count if a limit is set
+        if (downloadLimit !== null) {
+            await conn.db.collection("uploads.files").updateOne(
+                { _id: file._id },
+                { $inc: { "metadata.currentDownloads": 1 } }
+            );
+        }
 
         let downloadFileName;
         let contentType;
@@ -155,7 +183,6 @@ app.get("/download/:code", async (req, res) => {
             downloadFileName = file.filename;
             contentType = 'application/zip';
         } else {
-            // For single files, remove the fileCode prefix from the filename
             downloadFileName = file.filename.replace(/^\d{6}-/, '');
             contentType = file.contentType || "application/octet-stream";
         }
@@ -173,7 +200,25 @@ app.get("/direct-download/:code", async (req, res) => {
     const fileCode = req.params.code;
     try {
         const file = await conn.db.collection("uploads.files").findOne({ filename: new RegExp(`^${fileCode}-`) });
-        if (!file) return res.status(404).json({ error: "File not found" });
+        if (!file) return res.status(404).json({ error: "File not found or expired" });
+
+        let downloadLimit = file.metadata.downloadLimit;
+        let currentDownloads = file.metadata.currentDownloads;
+
+        if (downloadLimit !== null && currentDownloads >= downloadLimit) {
+            // Optionally delete the file after the limit is reached
+            await gridFSBucket.delete(new ObjectId(file._id));
+            await conn.db.collection("uploads.chunks").deleteMany({ files_id: file._id });
+            return res.status(403).json({ error: "Download limit reached for this file." });
+        }
+
+        // Increment download count if a limit is set
+        if (downloadLimit !== null) {
+            await conn.db.collection("uploads.files").updateOne(
+                { _id: file._id },
+                { $inc: { "metadata.currentDownloads": 1 } }
+            );
+        }
 
         let downloadFileName;
         let contentType;
@@ -182,7 +227,6 @@ app.get("/direct-download/:code", async (req, res) => {
             downloadFileName = file.filename;
             contentType = 'application/zip';
         } else {
-            // For single files, remove the fileCode prefix from the filename
             downloadFileName = file.filename.replace(/^\d{6}-/, '');
             contentType = file.contentType || "application/octet-stream";
         }
@@ -233,6 +277,15 @@ app.post("/share-text", async (req, res) => {
         });
 
         // Optional: Auto-expire after 10 mins
+        // Optional: Auto-expire after 5 mins
+        try {
+            await conn.db.collection("texts").dropIndex("createdAt_1");
+            console.log("🗑️ Dropped old 'texts' TTL index.");
+        } catch (e) {
+            if (e.codeName !== 'IndexNotFound') {
+                console.warn("⚠️ Could not drop 'texts' TTL index (might not exist or other error):", e.message);
+            }
+        }
         await conn.db.collection("texts").createIndex(
             { createdAt: 1 },
             { expireAfterSeconds: 300 }
