@@ -10,7 +10,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(fileUpload({
-    limits: { fileSize: 10 * 1024 * 1024 },
+    limits: { fileSize: 100 * 1024 * 1024 },
     abortOnLimit: true
 }));
 
@@ -18,7 +18,7 @@ app.use(fileUpload({
 app.use((err, req, res, next) => {
     if (err.code === 'LIMIT_FILE_SIZE') {
         return res.status(413).json({
-            error: 'File too large. Maximum size is 10MB.'
+            error: 'File too large. Maximum size is 100MB.'
         });
     }
     next(err);
@@ -73,7 +73,8 @@ app.post("/upload", (req, res) => {
     uploadStream.end(file.data);
 
     uploadStream.on("finish", () => {
-        res.json({ fileCode });
+        const directDownloadLink = `/direct-download/${fileCode}`;
+        res.json({ fileCode, directDownloadLink });
     });
 
     uploadStream.on("error", (err) => {
@@ -81,8 +82,26 @@ app.post("/upload", (req, res) => {
     });
 });
 
-// 📥 Download File by Code
+// 📥 Download File by Code (for manual retrieval)
 app.get("/download/:code", async (req, res) => {
+    const fileCode = req.params.code;
+    try {
+        const files = await conn.db.collection("uploads.files").find({ filename: new RegExp(`^${fileCode}-`) }).toArray();
+        if (!files.length) return res.status(404).json({ error: "File not found" });
+
+        const file = files[0];
+        const originalFileName = file.filename.replace(/^\d{6}-/, '');
+
+        res.set("Content-Disposition", `attachment; filename="${originalFileName}"`);
+        res.set("Content-Type", file.contentType || "application/octet-stream");
+        gridFSBucket.openDownloadStream(file._id).pipe(res);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// ⬇️ Direct Download File by Code
+app.get("/direct-download/:code", async (req, res) => {
     const fileCode = req.params.code;
     try {
         const files = await conn.db.collection("uploads.files").find({ filename: new RegExp(`^${fileCode}-`) }).toArray();
